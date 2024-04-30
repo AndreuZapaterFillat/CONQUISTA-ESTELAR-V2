@@ -3,10 +3,10 @@ package Partida;
 public class Ciudad {
 
 	String nombre;
-	int [] coordenadas;
+	public int [] coordenadas;
 	String enfermedad;
 	int infeccion;
-	String [] ciudadesColindantes;
+	public String [] ciudadesColindantes;
 	
 	
 	// Getters

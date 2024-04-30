@@ -24,38 +24,6 @@ public class Menu extends JFrame{
         Image iconImage = new ImageIcon("logo.jpg").getImage();
         setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
         
-        JButton Musica = new JButton("música");
-        Musica.setForeground(new Color(255, 255, 255));
-        Musica.setFont(buttonFont);
-        setButtonProperties(Musica); // Establecer propiedades del botón
-        Musica.setBounds(480, 707, 350, 40);
-        getContentPane().add(Musica);
-        Musica.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	JFrame ventanaMusica = new JFrame("Musica");
-                ventanaMusica.setSize(300, 200);
-                ventanaMusica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                ventanaMusica.setLocationRelativeTo(null);
-
-                JButton subirButton = new JButton("Subir");
-                JButton bajarButton = new JButton("Bajar");
-                JButton mutearButton = new JButton("Mute");
-
-                subirButton.addActionListener(this);
-                bajarButton.addActionListener(this);
-                mutearButton.addActionListener(this);
-
-                JPanel panel = new JPanel();
-                panel.setLayout(new GridLayout(3, 1));
-                panel.add(subirButton);
-                panel.add(bajarButton);
-                panel.add(mutearButton);
-
-                ventanaMusica.getContentPane().add(panel);
-                ventanaMusica.setVisible(true);
-            }
-        });
-        
         JButton NuevaPartida = new JButton("nueva partida");
         NuevaPartida.setForeground(new Color(255, 255, 255));
         NuevaPartida.setFont(buttonFont);
@@ -90,7 +58,7 @@ public class Menu extends JFrame{
             	dispose(); // Cierra la ventana
             }
         });
-        Salir.setBounds(480, 787, 350, 40);
+        Salir.setBounds(480, 707, 350, 40);
         getContentPane().add(Salir);
         
         JButton Autores = new JButton("Autores");
