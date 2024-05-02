@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,6 +24,10 @@ import Partida.Virus;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 
 public class dificultad extends JFrame implements ActionListener {
@@ -32,40 +37,59 @@ public class dificultad extends JFrame implements ActionListener {
 	public dificultad() {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1280,720);
-		this.setTitle("Dificultad test");
+		this.setSize(1280,1024);
+		this.setTitle("Selector Dificultad");
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
+        Image iconImage = new ImageIcon("logo.jpg").getImage();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
+        
+        Font customFont = loadFont("Starjedi.ttf");
+        Font buttonFont = customFont.deriveFont(Font.PLAIN, 30);
+        Font titleFont = customFont.deriveFont(Font.PLAIN, 60);
+		
 		JLabel Dificultad = new JLabel("Elige la dificultad");
-		Dificultad.setFont(new Font("Nadeem", Font.BOLD, 39));
+		Dificultad.setFont(titleFont);
 		Dificultad.setForeground(new Color(255, 255, 255));
-		Dificultad.setBounds(471, 50, 360, 73);
+		Dificultad.setBounds(290, 200, 700, 73);
 		getContentPane().add(Dificultad);
 		
 		facil = new JButton("Fácil");
-		facil.setBounds(555, 124, 117, 29);
+		facil.setForeground(new Color(255, 255, 255));
+		facil.setBounds(465, 400, 350, 29);
 		getContentPane().add(facil);
+		facil.setFont(buttonFont);
+        setButtonProperties(facil);
 		facil.addActionListener(this);
 		
 		normal = new JButton("Normal");
-		normal.setBounds(555, 192, 117, 29);
+		normal.setForeground(new Color(255, 255, 255));
+		normal.setBounds(465, 500, 350, 29);
 		getContentPane().add(normal);
+		normal.setFont(buttonFont);
+        setButtonProperties(normal);
 		normal.addActionListener(this);
 		
 		dificil = new JButton("Difícil");
-		dificil.setBounds(555, 262, 117, 29);
+		dificil.setForeground(new Color(255, 255, 255));
+		dificil.setBounds(465, 600, 350, 29);
 		getContentPane().add(dificil);
+		dificil.setFont(buttonFont);
+        setButtonProperties(dificil);
 		dificil.addActionListener(this);
 		
 		personalizado = new JButton("Personalizado");
-		personalizado.setBounds(555, 341, 117, 29);
+		personalizado.setForeground(new Color(255, 255, 255));
+		personalizado.setBounds(465, 700, 350, 29);
 		getContentPane().add(personalizado);
+		personalizado.setFont(buttonFont);
+        setButtonProperties(personalizado);
 		personalizado.addActionListener(this);
 		
 		JLabel Fondo = new JLabel("fondo");
-		Fondo.setIcon(new ImageIcon("/Users/alejandrorodriguezvallin/Desktop/Ilerna/Prog/Pandemic/src/Menu/fondoSW3.jpeg"));
-		Fondo.setBounds(0, -17, 1314, 709);
+		Fondo.setIcon(new ImageIcon("F:\\ILERNA\\CONQUISTA-ESTELAR\\Pandemic\\fondo_dificultad.jpg"));
+		Fondo.setBounds(0, 0, 1280, 1024);
 		getContentPane().add(Fondo);
 	
 		
@@ -721,7 +745,7 @@ public class dificultad extends JFrame implements ActionListener {
 				result = JOptionPane.showConfirmDialog(null, panel, "Personalizado",
 		                JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-				// Si el usuario presiona OK, obtener el texto ingresado
+				// Si el usuario presiona OK, obtener el texto ingresadoreh
 				if (result == JOptionPane.OK_OPTION) {
 				     respuesta = texto.getText();
 				}
@@ -760,7 +784,23 @@ public class dificultad extends JFrame implements ActionListener {
 			return lineaTot;
 			
 		}
-	
+		
+	    private void setButtonProperties(JButton button) {
+	        button.setOpaque(false); // Hace que el botón sea transparente
+	        button.setContentAreaFilled(false); // Hace que el área de contenido del botón sea transparente
+	        button.setBorderPainted(false); // Quita el borde del botón
+	    }
+	    
+	    // Método para cargar la fuente desde un archivo .ttf
+	    private Font loadFont(String path) {
+	        try {
+	            return Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(Font.PLAIN, 12);
+	        } catch (IOException | FontFormatException e) {
+	            e.printStackTrace();
+	            // Si hay un error al cargar la fuente, devuelve una fuente por defecto (Tahoma)
+	            return new Font("Tahoma", Font.PLAIN, 12);
+	        }
+	    }
 	
 	
 	

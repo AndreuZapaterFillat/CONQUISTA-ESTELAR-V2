@@ -32,66 +32,118 @@ public Tablero() {
         setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
         getContentPane().setLayout(null);
         
-        JProgressBar progressBar_3 = new JProgressBar();
-        progressBar_3.setToolTipText("");
-        progressBar_3.setStringPainted(true);
-        progressBar_3.setForeground(new Color(255, 0, 0));
-        progressBar_3.setBounds(319, 915, 250, 30);
-        getContentPane().add(progressBar_3);
-        progressBar_3.setUI(new BasicProgressBarUI() {
+        JButton Investigar = new JButton("investigar");
+        Investigar.setForeground(new Color(255, 255, 255));
+        Investigar.setBounds(675, 915, 150, 30);
+        getContentPane().add(Investigar);
+        Investigar.setFont(buttonFont);
+        setButtonProperties(Investigar);
+        
+        JLabel Brotes = new JLabel("Brotes");
+        Brotes.setForeground(new Color(255, 255, 255));
+        Brotes.setHorizontalAlignment(SwingConstants.CENTER);
+        Brotes.setBounds(950, 850, 150, 30);
+        getContentPane().add(Brotes);
+        Brotes.setFont(buttonFont);
+        
+        JLabel Conquistas = new JLabel("conquistas");
+        Conquistas.setForeground(new Color(255, 255, 255));
+        Conquistas.setHorizontalAlignment(SwingConstants.CENTER);
+        Conquistas.setBounds(950, 915, 150, 30);
+        getContentPane().add(Conquistas);
+        Conquistas.setFont(buttonFont);
+        
+        JLabel Acciones = new JLabel("acciones");
+        Acciones.setHorizontalAlignment(SwingConstants.CENTER);
+        Acciones.setForeground(new Color(255, 255, 255));
+        Acciones.setBounds(1100, 850, 150, 30);
+        getContentPane().add(Acciones);
+        Acciones.setFont(buttonFont);
+        
+        JLabel Rondas = new JLabel("ronda");
+        Rondas.setHorizontalAlignment(SwingConstants.CENTER);
+        Rondas.setForeground(new Color(255, 255, 255));
+        Rondas.setBounds(1100, 915, 150, 30);
+        getContentPane().add(Rondas);
+        Rondas.setFont(buttonFont);
+        
+        JLabel Darth_Maul = new JLabel("darth maul");
+        Darth_Maul.setBackground(new Color(255, 255, 0));
+        Darth_Maul.setForeground(new Color(255, 255, 0));
+        Darth_Maul.setBounds(12, 885, 250, 30);
+        getContentPane().add(Darth_Maul);
+        Darth_Maul.setHorizontalAlignment(SwingConstants.CENTER);
+        Darth_Maul.setFont(buttonFont);
+        
+        JLabel General_Grievous = new JLabel("general grievous");
+        General_Grievous.setHorizontalAlignment(SwingConstants.CENTER);
+        General_Grievous.setForeground(new Color(128, 255, 0));
+        General_Grievous.setBounds(319, 885, 250, 30);
+        getContentPane().add(General_Grievous);
+        General_Grievous.setFont(buttonFont);
+        
+        JLabel Darth_Vader = new JLabel("darth vader");
+        Darth_Vader.setHorizontalAlignment(SwingConstants.CENTER);
+        Darth_Vader.setForeground(new Color(255, 0, 0));
+        Darth_Vader.setBounds(319, 820, 250, 30);
+        getContentPane().add(Darth_Vader);
+        Darth_Vader.setFont(buttonFont);
+        
+        JLabel Darth_Sidious = new JLabel("darth sidious");
+        Darth_Sidious.setHorizontalAlignment(SwingConstants.CENTER);
+        Darth_Sidious.setForeground(new Color(0, 255, 255));
+        Darth_Sidious.setBounds(12, 820, 250, 30);
+        getContentPane().add(Darth_Sidious);
+        Darth_Sidious.setFont(buttonFont);
+        
+        JProgressBar progressBar_Vader = new JProgressBar();
+        progressBar_Vader.setToolTipText("");
+        progressBar_Vader.setStringPainted(true);
+        progressBar_Vader.setForeground(new Color(255, 0, 0));
+        progressBar_Vader.setBounds(319, 850, 250, 30);
+        getContentPane().add(progressBar_Vader);
+        progressBar_Vader.setUI(new BasicProgressBarUI() {
             protected Color getSelectionForeground() {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_3.setValue(100);
+        progressBar_Vader.setValue(100);
         
-        JProgressBar progressBar_2 = new JProgressBar();
-        progressBar_2.setStringPainted(true);
-        progressBar_2.setForeground(new Color(128, 255, 0));
-        progressBar_2.setBounds(319, 874, 250, 30);
-        getContentPane().add(progressBar_2);
-        progressBar_2.setUI(new BasicProgressBarUI() {
+        JProgressBar progressBar_Grievous = new JProgressBar();
+        progressBar_Grievous.setStringPainted(true);
+        progressBar_Grievous.setForeground(new Color(128, 255, 0));
+        progressBar_Grievous.setBounds(319, 915, 250, 30);
+        getContentPane().add(progressBar_Grievous);
+        progressBar_Grievous.setUI(new BasicProgressBarUI() {
             protected Color getSelectionForeground() {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_2.setValue(75);
+        progressBar_Grievous.setValue(75);
         
-        JProgressBar progressBar_1 = new JProgressBar();
-        progressBar_1.setForeground(new Color(255, 255, 0));
-        progressBar_1.setStringPainted(true);
-        progressBar_1.setBounds(12, 915, 250, 30);
-        getContentPane().add(progressBar_1);
-        progressBar_1.setUI(new BasicProgressBarUI() {
+        JProgressBar progressBar_Maul = new JProgressBar();
+        progressBar_Maul.setForeground(new Color(255, 255, 0));
+        progressBar_Maul.setStringPainted(true);
+        progressBar_Maul.setBounds(12, 915, 250, 30);
+        getContentPane().add(progressBar_Maul);
+        progressBar_Maul.setUI(new BasicProgressBarUI() {
             protected Color getSelectionForeground() {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_1.setValue(50);
+        progressBar_Maul.setValue(50);
         
-        JProgressBar progressBar = new JProgressBar();
-        progressBar.setForeground(new Color(0, 255, 255));
-        progressBar.setStringPainted(true);
-        progressBar.setBounds(12, 874, 250, 30);
-        getContentPane().add(progressBar);
-        progressBar.setUI(new BasicProgressBarUI() {
+        JProgressBar progressBar_Sidious = new JProgressBar();
+        progressBar_Sidious.setForeground(new Color(0, 255, 255));
+        progressBar_Sidious.setStringPainted(true);
+        progressBar_Sidious.setBounds(12, 850, 250, 30);
+        getContentPane().add(progressBar_Sidious);
+        progressBar_Sidious.setUI(new BasicProgressBarUI() {
             protected Color getSelectionForeground() {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar.setValue(25);
-        
-        JButton Iego = new JButton("iego");
-        Iego.setForeground(new Color(255, 0, 0));
-        Iego.setBounds(1113, 428, 125, 23);
-        getContentPane().add(Iego);
-        Iego.setFont(buttonFont);
-        setButtonProperties(Iego);
-        Iego.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mostrarVentana("iego", 3); // Mostrar la ventana con la información
-            }
-        });
+        progressBar_Sidious.setValue(25);
         
         JButton Jedah = new JButton("jedah");
         Jedah.setForeground(new Color(255, 0, 0));
@@ -102,6 +154,18 @@ public Tablero() {
         Jedah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mostrarVentana("Jedah", 3); // Mostrar la ventana con la información
+            }
+        });
+        
+        JButton Iego = new JButton("iego");
+        Iego.setForeground(new Color(255, 0, 0));
+        Iego.setBounds(1113, 428, 125, 23);
+        getContentPane().add(Iego);
+        Iego.setFont(buttonFont);
+        setButtonProperties(Iego);
+        Iego.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarVentana("iego", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -225,6 +289,18 @@ public Tablero() {
             }
         });
         
+        JButton Wayland = new JButton("wayland");
+        Wayland.setForeground(new Color(128, 255, 0));
+        Wayland.setBounds(839, 598, 125, 23);
+        getContentPane().add(Wayland);
+        Wayland.setFont(buttonFont);
+        setButtonProperties(Wayland);
+        Wayland.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarVentana("wayland", 3); // Mostrar la ventana con la información
+            }
+        });
+        
         JButton Bakura = new JButton("bakura");
         Bakura.setForeground(new Color(128, 255, 0));
         Bakura.setBounds(912, 478, 125, 23);
@@ -237,15 +313,16 @@ public Tablero() {
             }
         });
         
-        JButton Wayland = new JButton("wayland");
-        Wayland.setForeground(new Color(128, 255, 0));
-        Wayland.setBounds(829, 598, 125, 23);
-        getContentPane().add(Wayland);
-        Wayland.setFont(buttonFont);
-        setButtonProperties(Wayland);
-        Wayland.addActionListener(new ActionListener() {
+               
+        JButton Rishi = new JButton("rishi");
+        Rishi.setForeground(new Color(128, 255, 0));
+        Rishi.setBounds(877, 386, 125, 23);
+        getContentPane().add(Rishi);
+        Rishi.setFont(buttonFont);
+        setButtonProperties(Rishi);
+        Rishi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("wayland", 3); // Mostrar la ventana con la información
+                mostrarVentana("rishi", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -258,18 +335,6 @@ public Tablero() {
         Hapes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mostrarVentana("hapes", 3); // Mostrar la ventana con la información
-            }
-        });
-        
-        JButton Rishi = new JButton("rishi");
-        Rishi.setForeground(new Color(128, 255, 0));
-        Rishi.setBounds(877, 386, 125, 23);
-        getContentPane().add(Rishi);
-        Rishi.setFont(buttonFont);
-        setButtonProperties(Rishi);
-        Rishi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mostrarVentana("rishi", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -685,9 +750,9 @@ public Tablero() {
 	// Método para mostrar una ventana con el nombre de la ciudad y el nivel de infección
 	private void mostrarVentana(String ciudad, int nivelInfeccion) {
 	    JFrame ventana = new JFrame();
-	    JLabel etiquetaCiudad = new JLabel("Ciudad : " + ciudad);
-	    JLabel etiquetaNivel = new JLabel("Nivel de conquista : " + nivelInfeccion);
-	    JButton reconquistarButton = new JButton("Reconquistar");
+	    JLabel etiquetaCiudad = new JLabel("planeta : " + ciudad);
+	    JLabel etiquetaNivel = new JLabel("nivel de conquista : " + nivelInfeccion);
+	    JButton reconquistarButton = new JButton("reconquistar");
 
 	    Font customFont = loadFont("Starjedi.ttf");
     	Font buttonFont = customFont.deriveFont(Font.PLAIN, 14);
