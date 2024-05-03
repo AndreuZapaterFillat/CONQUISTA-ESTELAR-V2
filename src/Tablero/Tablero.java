@@ -16,6 +16,11 @@ import java.io.*;
 
 public class Tablero extends JFrame {
 	
+	int acciones  = 4;
+	int ronda = 1;
+	JLabel Rondas = new JLabel("ronda 1");
+	JLabel Acciones = new JLabel("acciones: 4");
+	
 	public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac) {
 	
 
@@ -64,14 +69,14 @@ public class Tablero extends JFrame {
         getContentPane().add(Conquistas);
         Conquistas.setFont(buttonFont);
         
-        JLabel Acciones = new JLabel("acciones");
+        
         Acciones.setHorizontalAlignment(SwingConstants.CENTER);
         Acciones.setForeground(new Color(255, 255, 255));
         Acciones.setBounds(1100, 850, 150, 30);
         getContentPane().add(Acciones);
         Acciones.setFont(buttonFont);
         
-        JLabel Rondas = new JLabel("ronda");
+        
         Rondas.setHorizontalAlignment(SwingConstants.CENTER);
         Rondas.setForeground(new Color(255, 255, 255));
         Rondas.setBounds(1100, 915, 150, 30);
@@ -164,7 +169,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Jedah);
         Jedah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[47]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[47], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -176,7 +181,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Iego);
         Iego.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[46]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[46], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -188,7 +193,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Scarif);
         Scarif.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[45]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[45], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -200,7 +205,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Exegol);
         Exegol.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[44]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[44], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -212,7 +217,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Crait);
         Crait.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[43]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[43], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -224,7 +229,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Ahch_To);
         Ahch_To.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[42]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[42], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -236,7 +241,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Korriban);
         Korriban.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[41]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[41], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -248,7 +253,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Ithor);
         Ithor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[40]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[40], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -260,7 +265,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Duro);
         Duro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[39]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[39], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -272,7 +277,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Bothawui);
         Bothawui.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[38]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[38], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -284,7 +289,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Eriadu);
         Eriadu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[37]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[37], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -296,7 +301,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Ilum);
         Ilum.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[36]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[36], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -308,7 +313,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Wayland);
         Wayland.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[35]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[35], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -320,7 +325,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Bakura);
         Bakura.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[34]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[34], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -333,7 +338,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Rishi);
         Rishi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[33]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[33], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -345,7 +350,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Hapes);
         Hapes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[32]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[32], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -357,7 +362,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Dathomir);
         Dathomir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[31]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[31], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -369,7 +374,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Onderon);
         Onderon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[30]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[30], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -381,7 +386,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Manaan);
         Manaan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[29]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[29], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -393,7 +398,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Mygeeto);
         Mygeeto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[28]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[28], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -405,7 +410,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Zeltros);
         Zeltros.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[27]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[27], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -417,7 +422,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Malachor);
         Malachor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[26]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[26], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -429,7 +434,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Kessel);
         Kessel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[25]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[25], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -441,7 +446,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Mon_Cala);
         Mon_Cala.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[24]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[24], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -453,7 +458,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Lothal);
         Lothal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[23]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[23], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -465,7 +470,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Nal_Hutta);
         Nal_Hutta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[22]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[22], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -477,7 +482,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Taris);
         Taris.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[21]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[21], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -489,7 +494,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Felucia);
         Felucia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[20]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[20], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -501,7 +506,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Dantooine);
         Dantooine.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[19]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[19], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -513,7 +518,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Mandalore);
         Mandalore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[18]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[18], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -525,7 +530,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Ryloth);
         Ryloth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[17]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[17], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -537,7 +542,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Sullust);
         Sullust.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[16]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[16], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -549,7 +554,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Corellia);
         Corellia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[15]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[15], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -561,7 +566,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Chandrilla);
         Chandrilla.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[14]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[14], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -573,7 +578,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Jakku);
         Jakku.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[13]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[13], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -585,7 +590,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Utapau);
         Utapau.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[12]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[12], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -597,7 +602,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Yavin);
         Yavin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[11]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[11], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -609,7 +614,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Dagobah);
         Dagobah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[10]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[10], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -621,7 +626,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Mustafar);
         Mustafar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[9]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[9], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -633,7 +638,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Geonosis);
         Geonosis.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[8]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[8], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -645,7 +650,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Kamino);
         Kamino.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[7]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[7], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -657,7 +662,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Naboo);
         Naboo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[6]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[6], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -669,7 +674,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Hoth);
         Hoth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[5]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[5], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -681,7 +686,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Endor);
         Endor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[4]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[4], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -693,7 +698,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Kashyyyk);
         Kashyyyk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[3]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[3], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -705,7 +710,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Alderaan);
         Alderaan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[2]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[2], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -717,7 +722,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Tatooine);
         Tatooine.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[1]); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[1], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -729,7 +734,7 @@ public class Tablero extends JFrame {
         setButtonProperties(Coruscant);
         Coruscant.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana(ciudades[0]); // Mostrar la ventana con la información
+                mostrarVentana(ciudades[0], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
@@ -740,6 +745,8 @@ public class Tablero extends JFrame {
         getContentPane().add(Mapa);
               
         setVisible(true);
+        
+        
         
 	}
 
@@ -760,17 +767,27 @@ public class Tablero extends JFrame {
 	}
 	
 	// Método para mostrar una ventana con el nombre de la ciudad y el nivel de infección
-	private void mostrarVentana(Ciudad ciudad) {
+	private void mostrarVentana(Ciudad ciudad, Ciudad [] ciudades, int infectadasRonda) {
 	    JFrame ventana = new JFrame();
 	    JLabel etiquetaCiudad = new JLabel("planeta : " + ciudad.getnombre());
 	    JLabel etiquetaNivel = new JLabel("nivel de conquista : " + ciudad.getinfeccion());
 	    JButton reconquistarButton = new JButton("reconquistar");
 	    reconquistarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	if(ciudad.getinfeccion() != 0) {
+            	if(ciudad.getinfeccion() != 0 && acciones != 0) {
             		ciudad.setinfeccion(ciudad.getinfeccion() - 1);
-            		
-            	}else {
+            		etiquetaNivel.setText("nivel de conquista : " + ciudad.getinfeccion());
+            		acciones--;
+            		modifcarAcciones();
+            		if(acciones == 0) {
+            			ronda++;
+                		acciones = 4;
+                		modifcarAcciones();
+                		pasarRonda();
+                		infectarCiudades(ciudades, infectadasRonda);
+                		//JOptionPane.showMessageDialog(null, "Ronda " + ronda);
+            		}
+            	}else if(ciudad.getinfeccion() == 0 && acciones != 0){
             		JOptionPane.showMessageDialog(null, "No puedes reconquistar ya que ya es 0");
             	}
                 
@@ -813,6 +830,35 @@ public class Tablero extends JFrame {
 	    // Aplicar propiedades al botón "Reconquistar"
 	    setButtonProperties(reconquistarButton);
 	}
+	
+	private void infectarCiudades(Ciudad [] ciudades, int infectadasRonda) {
+		int i = 0;
+		int j = 0;
+		
+		while(j != infectadasRonda) {
+			if((int)(Math.random()*20) == 2) {
+				
+				if(ciudades[i].getinfeccion() >= 0 && ciudades[i].getinfeccion() <= 3 ) {
+					ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+					j++;
+				}
+			}
+			
+			if(i == 47) {
+				i = 0;
+			}else {
+				i++;
+			}
+			
+		}
+	}
 
+	private void modifcarAcciones() {
+		Acciones.setText("acciones: " + acciones);
+	}
+	
+	private void pasarRonda() {
+		Rondas.setText("ronda " + ronda);
+	}
 
 }
