@@ -6,17 +6,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
-import Partida.Ciudad;
-import Partida.Vacunas;
-import Partida.Virus;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
 public class Tablero extends JFrame {
 	
-public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
+public Tablero() {
 	
 
     	Font customFont = loadFont("Starjedi.ttf");
@@ -35,6 +31,13 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         Image iconImage = new ImageIcon("logo.jpg").getImage();
         setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
         getContentPane().setLayout(null);
+        
+        JButton Informacion = new JButton("informacion");
+        Informacion.setForeground(new Color(255, 255, 255));
+        Informacion.setBounds(675, 850, 150, 30);
+        getContentPane().add(Informacion);
+        Informacion.setFont(buttonFont);
+        setButtonProperties(Informacion);
         
         JButton Investigar = new JButton("investigar");
         Investigar.setForeground(new Color(255, 255, 255));
@@ -157,7 +160,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Jedah);
         Jedah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[47].getnombre().toLowerCase(), ciudades[47].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("Jedah", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -169,7 +172,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Iego);
         Iego.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[46].getnombre().toLowerCase(), ciudades[46].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("iego", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -181,7 +184,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Scarif);
         Scarif.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[45].getnombre().toLowerCase(), ciudades[45].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("scarif", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -193,7 +196,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Exegol);
         Exegol.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[44].getnombre().toLowerCase(), ciudades[44].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("exegol", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -205,7 +208,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Crait);
         Crait.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[43].getnombre().toLowerCase(), ciudades[43].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("crait", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -217,7 +220,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Ahch_To);
         Ahch_To.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[42].getnombre().toLowerCase(), ciudades[42].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("ahch to", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -229,7 +232,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Korriban);
         Korriban.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[41].getnombre().toLowerCase(), ciudades[41].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("korribar", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -241,7 +244,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Ithor);
         Ithor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[40].getnombre().toLowerCase(), ciudades[40].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("ithor", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -253,7 +256,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Duro);
         Duro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[39].getnombre().toLowerCase(), ciudades[39].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("duro", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -265,7 +268,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Bothawui);
         Bothawui.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[38].getnombre().toLowerCase(), ciudades[38].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("bothawui", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -277,7 +280,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Eriadu);
         Eriadu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[37].getnombre().toLowerCase(), ciudades[37].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("eriadu", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -289,7 +292,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Ilum);
         Ilum.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[36].getnombre().toLowerCase(), ciudades[36].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("ilum", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -301,7 +304,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Wayland);
         Wayland.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[35].getnombre().toLowerCase(), ciudades[35].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("wayland", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -313,7 +316,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Bakura);
         Bakura.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[34].getnombre().toLowerCase(), ciudades[34].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("bakura", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -326,7 +329,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Rishi);
         Rishi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[33].getnombre().toLowerCase(), ciudades[33].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("rishi", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -338,7 +341,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Hapes);
         Hapes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[32].getnombre().toLowerCase(), ciudades[32].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("hapes", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -350,7 +353,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Dathomir);
         Dathomir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[31].getnombre().toLowerCase(), ciudades[31].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("dathomir", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -362,7 +365,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Onderon);
         Onderon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[30].getnombre().toLowerCase(), ciudades[30].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("onderon", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -374,7 +377,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Manaan);
         Manaan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[29].getnombre().toLowerCase(), ciudades[29].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("manaan", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -386,7 +389,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Mygeeto);
         Mygeeto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[28].getnombre().toLowerCase(), ciudades[28].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("mygeeto", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -398,7 +401,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Zeltros);
         Zeltros.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[27].getnombre().toLowerCase(), ciudades[27].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("zeltros", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -410,7 +413,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Malachor);
         Malachor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[26].getnombre().toLowerCase(), ciudades[26].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("malachor", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -422,7 +425,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Kessel);
         Kessel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[25].getnombre().toLowerCase(), ciudades[25].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("kessel", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -434,7 +437,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Mon_Cala);
         Mon_Cala.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[24].getnombre().toLowerCase(), ciudades[24].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("mon cala", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -446,7 +449,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Lothal);
         Lothal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[23].getnombre().toLowerCase(), ciudades[23].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("lothal", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -458,7 +461,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Nal_Hutta);
         Nal_Hutta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[22].getnombre().toLowerCase(), ciudades[22].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("nal hutta", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -470,7 +473,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Taris);
         Taris.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[21].getnombre().toLowerCase(), ciudades[21].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("taris", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -482,7 +485,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Felucia);
         Felucia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[20].getnombre().toLowerCase(), ciudades[20].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("felucia", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -494,7 +497,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Dantooine);
         Dantooine.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[19].getnombre().toLowerCase(), ciudades[19].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("dantooine", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -506,7 +509,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Mandalore);
         Mandalore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[18].getnombre().toLowerCase(), ciudades[18].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("Mandalore", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -518,7 +521,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Ryloth);
         Ryloth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[17].getnombre().toLowerCase(), ciudades[17].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("ryloth", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -530,7 +533,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Sullust);
         Sullust.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[16].getnombre().toLowerCase(), ciudades[16].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("sullust", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -542,7 +545,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Corellia);
         Corellia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[15].getnombre().toLowerCase(), ciudades[15].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("corellia", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -554,7 +557,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Chandrilla);
         Chandrilla.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[14].getnombre().toLowerCase(), ciudades[14].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("chandrilla", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -566,7 +569,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Jakku);
         Jakku.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[13].getnombre().toLowerCase(), ciudades[13].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("jakku", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -578,7 +581,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Utapau);
         Utapau.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[12].getnombre().toLowerCase(), ciudades[12].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("utapau", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -590,7 +593,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Yavin);
         Yavin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[11].getnombre().toLowerCase(), ciudades[11].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("yavin", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -602,7 +605,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Dagobah);
         Dagobah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[10].getnombre().toLowerCase(), ciudades[10].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("dagobah", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -614,7 +617,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Mustafar);
         Mustafar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[9].getnombre().toLowerCase(), ciudades[9].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("mustafar", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -626,7 +629,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Geonosis);
         Geonosis.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[8].getnombre().toLowerCase(), ciudades[8].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("geonosis", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -638,7 +641,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Kamino);
         Kamino.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[7].getnombre().toLowerCase(), ciudades[7].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("kamino", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -650,7 +653,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Naboo);
         Naboo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[6].getnombre().toLowerCase(), ciudades[6].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("naboo", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -662,7 +665,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Hoth);
         Hoth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[5].getnombre().toLowerCase(), ciudades[5].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("hoth", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -674,7 +677,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Endor);
         Endor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[4].getnombre().toLowerCase(), ciudades[4].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("endor", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -686,7 +689,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Kashyyyk);
         Kashyyyk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[3].getnombre().toLowerCase(), ciudades[3].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("kashyyyk", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -698,7 +701,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Alderaan);
         Alderaan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[2].getnombre().toLowerCase(), ciudades[2].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("alderaan", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -710,7 +713,7 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Tatooine);
         Tatooine.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[1].getnombre().toLowerCase(), ciudades[1].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("tatooine", 3); // Mostrar la ventana con la información
             }
         });
         
@@ -722,14 +725,14 @@ public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
         setButtonProperties(Coruscant);
         Coruscant.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana(ciudades[0].getnombre().toLowerCase(), ciudades[0].getinfeccion()); // Mostrar la ventana con la información
+                mostrarVentana("coruscant", 3); // Mostrar la ventana con la información
             }
         });
         
         JLabel Mapa = new JLabel("");
         Mapa.setForeground(new Color(0, 128, 255));
         Mapa.setBounds(0, 0, 1264, 985);
-        Mapa.setIcon(new ImageIcon("Mapa_conquista_final.jpg"));
+        Mapa.setIcon(new ImageIcon("F:\\ILERNA\\M03 PROGRAMACIÓ\\UF1\\CONQUISTA ESTELAR\\Mapa_conquista_final.jpg"));
         getContentPane().add(Mapa);
               
         setVisible(true);
