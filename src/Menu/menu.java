@@ -14,9 +14,6 @@ public class menu extends JFrame{
         getContentPane().setBackground(new Color(240, 240, 240));
         getContentPane().setLayout(null);
         
-        JButton Salir = new JButton();
-        JButton NuevaPartida = new JButton();
-        
         // Carga la fuente personalizada
         Font customFont = loadFont("Starjedi.ttf");
         Font buttonFont = customFont.deriveFont(Font.PLAIN, 30);
@@ -27,7 +24,7 @@ public class menu extends JFrame{
         Image iconImage = new ImageIcon("logo.jpg").getImage();
         setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
         
-        NuevaPartida = new JButton("nueva partida");
+        JButton NuevaPartida = new JButton("nueva partida");
         NuevaPartida.setForeground(new Color(255, 255, 255));
         NuevaPartida.setFont(buttonFont);
         setButtonProperties(NuevaPartida); // Establecer propiedades del botón
@@ -58,14 +55,13 @@ public class menu extends JFrame{
         Versio.setFont(buttonFont);
         getContentPane().add(Versio);
               
-        Salir = new JButton("Salir");
+        JButton Salir = new JButton("Salir");
         Salir.setForeground(Color.WHITE);
         Salir.setFont(buttonFont);
         setButtonProperties(Salir); // Establecer propiedades del botón
         Salir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	dispose(); // Cierra la ventana
-            	
             }
         });
         Salir.setBounds(480, 707, 350, 40);
@@ -223,7 +219,6 @@ public class menu extends JFrame{
          
         instruccionesFrame.setVisible(true);
     }
-
     
 
 }

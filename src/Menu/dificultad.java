@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import Partida.Ciudad;
 import Partida.Vacunas;
 import Partida.Virus;
+import Tablero.Tablero;
 
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -88,7 +89,7 @@ public class dificultad extends JFrame implements ActionListener {
 		personalizado.addActionListener(this);
 		
 		JLabel Fondo = new JLabel("fondo");
-		Fondo.setIcon(new ImageIcon("F:\\ILERNA\\CONQUISTA-ESTELAR\\Pandemic\\fondo_dificultad.jpg"));
+		Fondo.setIcon(new ImageIcon("fondo_dificultad.jpg"));
 		Fondo.setBounds(0, 0, 1280, 1024);
 		getContentPane().add(Fondo);
 	
@@ -165,22 +166,8 @@ public class dificultad extends JFrame implements ActionListener {
 				
 			}
 			
-			for(i = 0; i < 48; i++) {
-				if(ciudades[i].getinfeccion() != 0) {
-					JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
-					System.out.println(ciudades[i].getnombre());
-					System.out.println(ciudades[i].getenfermedad());
-					System.out.println(ciudades[i].getinfeccion());
-					System.out.println(ciudades[i].coordenadas[0]);
-					System.out.println(ciudades[i].coordenadas[1]);
-					for(j = 0; j < ciudades[i].ciudadesColindantes.length; j++) {
-						System.out.println(ciudades[i].ciudadesColindantes[j]);
-					}
-					System.out.println();
-				}	
-			}
-			
-			
+			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			dispose();
 			
 		}
 		
@@ -246,21 +233,8 @@ public class dificultad extends JFrame implements ActionListener {
 				}
 				
 			}
-			
-			for(i = 0; i < 48; i++) {
-				if(ciudades[i].getinfeccion() != 0) {
-					JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
-					System.out.println(ciudades[i].getnombre());
-					System.out.println(ciudades[i].getenfermedad());
-					System.out.println(ciudades[i].getinfeccion());
-					System.out.println(ciudades[i].coordenadas[0]);
-					System.out.println(ciudades[i].coordenadas[1]);
-					for(j = 0; j < ciudades[i].ciudadesColindantes.length; j++) {
-						System.out.println(ciudades[i].ciudadesColindantes[j]);
-					}
-					System.out.println();
-				}	
-			}
+			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			dispose();
 			
 		}
 		
@@ -325,21 +299,8 @@ public class dificultad extends JFrame implements ActionListener {
 				}
 				
 			}
-			
-			for(i = 0; i < 48; i++) {
-				if(ciudades[i].getinfeccion() != 0) {
-					JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
-					System.out.println(ciudades[i].getnombre());
-					System.out.println(ciudades[i].getenfermedad());
-					System.out.println(ciudades[i].getinfeccion());
-					System.out.println(ciudades[i].coordenadas[0]);
-					System.out.println(ciudades[i].coordenadas[1]);
-					for(j = 0; j < ciudades[i].ciudadesColindantes.length; j++) {
-						System.out.println(ciudades[i].ciudadesColindantes[j]);
-					}
-					System.out.println();
-				}	
-			}
+			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			dispose();
 			
 		}
 		
@@ -432,21 +393,9 @@ public class dificultad extends JFrame implements ActionListener {
 				}
 				
 			}
-			
-			for(i = 0; i < 48; i++) {
-				if(ciudades[i].getinfeccion() != 0) {
-					JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
-					System.out.println(ciudades[i].getnombre());
-					System.out.println(ciudades[i].getenfermedad());
-					System.out.println(ciudades[i].getinfeccion());
-					System.out.println(ciudades[i].coordenadas[0]);
-					System.out.println(ciudades[i].coordenadas[1]);
-					for(j = 0; j < ciudades[i].ciudadesColindantes.length; j++) {
-						System.out.println(ciudades[i].ciudadesColindantes[j]);
-					}
-					System.out.println();
-				}	
-			}
+			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			dispose();
+
 		}
 		
 	}
