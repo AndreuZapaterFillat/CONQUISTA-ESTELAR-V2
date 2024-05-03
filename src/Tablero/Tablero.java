@@ -6,13 +6,17 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
+import Partida.Ciudad;
+import Partida.Vacunas;
+import Partida.Virus;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
 public class Tablero extends JFrame {
 	
-public Tablero() {
+public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna) {
 	
 
     	Font customFont = loadFont("Starjedi.ttf");
@@ -26,18 +30,12 @@ public Tablero() {
         setSize(screenWidth, screenHeight);
         setTitle("CONQUISTA ESTELAR");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		
 		 // Establecer el icono de la ventana
         Image iconImage = new ImageIcon("logo.jpg").getImage();
         setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
         getContentPane().setLayout(null);
-        
-        JButton Informacion = new JButton("informacion");
-        Informacion.setForeground(new Color(255, 255, 255));
-        Informacion.setBounds(675, 850, 150, 30);
-        getContentPane().add(Informacion);
-        Informacion.setFont(buttonFont);
-        setButtonProperties(Informacion);
         
         JButton Investigar = new JButton("investigar");
         Investigar.setForeground(new Color(255, 255, 255));
@@ -160,7 +158,7 @@ public Tablero() {
         setButtonProperties(Jedah);
         Jedah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("Jedah", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[47].getnombre().toLowerCase(), ciudades[47].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -172,7 +170,7 @@ public Tablero() {
         setButtonProperties(Iego);
         Iego.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("iego", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[46].getnombre().toLowerCase(), ciudades[46].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -184,7 +182,7 @@ public Tablero() {
         setButtonProperties(Scarif);
         Scarif.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("scarif", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[45].getnombre().toLowerCase(), ciudades[45].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -196,7 +194,7 @@ public Tablero() {
         setButtonProperties(Exegol);
         Exegol.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("exegol", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[44].getnombre().toLowerCase(), ciudades[44].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -208,7 +206,7 @@ public Tablero() {
         setButtonProperties(Crait);
         Crait.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("crait", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[43].getnombre().toLowerCase(), ciudades[43].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -220,7 +218,7 @@ public Tablero() {
         setButtonProperties(Ahch_To);
         Ahch_To.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("ahch to", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[42].getnombre().toLowerCase(), ciudades[42].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -232,7 +230,7 @@ public Tablero() {
         setButtonProperties(Korriban);
         Korriban.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("korribar", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[41].getnombre().toLowerCase(), ciudades[41].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -244,7 +242,7 @@ public Tablero() {
         setButtonProperties(Ithor);
         Ithor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("ithor", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[40].getnombre().toLowerCase(), ciudades[40].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -256,7 +254,7 @@ public Tablero() {
         setButtonProperties(Duro);
         Duro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("duro", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[39].getnombre().toLowerCase(), ciudades[39].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -268,7 +266,7 @@ public Tablero() {
         setButtonProperties(Bothawui);
         Bothawui.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("bothawui", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[38].getnombre().toLowerCase(), ciudades[38].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -280,7 +278,7 @@ public Tablero() {
         setButtonProperties(Eriadu);
         Eriadu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("eriadu", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[37].getnombre().toLowerCase(), ciudades[37].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -292,7 +290,7 @@ public Tablero() {
         setButtonProperties(Ilum);
         Ilum.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("ilum", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[36].getnombre().toLowerCase(), ciudades[36].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -304,7 +302,7 @@ public Tablero() {
         setButtonProperties(Wayland);
         Wayland.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("wayland", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[35].getnombre().toLowerCase(), ciudades[35].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -316,7 +314,7 @@ public Tablero() {
         setButtonProperties(Bakura);
         Bakura.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("bakura", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[34].getnombre().toLowerCase(), ciudades[34].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -329,7 +327,7 @@ public Tablero() {
         setButtonProperties(Rishi);
         Rishi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("rishi", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[33].getnombre().toLowerCase(), ciudades[33].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -341,7 +339,7 @@ public Tablero() {
         setButtonProperties(Hapes);
         Hapes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("hapes", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[32].getnombre().toLowerCase(), ciudades[32].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -353,7 +351,7 @@ public Tablero() {
         setButtonProperties(Dathomir);
         Dathomir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("dathomir", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[31].getnombre().toLowerCase(), ciudades[31].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -365,7 +363,7 @@ public Tablero() {
         setButtonProperties(Onderon);
         Onderon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("onderon", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[30].getnombre().toLowerCase(), ciudades[30].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -377,7 +375,7 @@ public Tablero() {
         setButtonProperties(Manaan);
         Manaan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("manaan", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[29].getnombre().toLowerCase(), ciudades[29].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -389,7 +387,7 @@ public Tablero() {
         setButtonProperties(Mygeeto);
         Mygeeto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("mygeeto", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[28].getnombre().toLowerCase(), ciudades[28].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -401,7 +399,7 @@ public Tablero() {
         setButtonProperties(Zeltros);
         Zeltros.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("zeltros", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[27].getnombre().toLowerCase(), ciudades[27].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -413,7 +411,7 @@ public Tablero() {
         setButtonProperties(Malachor);
         Malachor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("malachor", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[26].getnombre().toLowerCase(), ciudades[26].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -425,7 +423,7 @@ public Tablero() {
         setButtonProperties(Kessel);
         Kessel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("kessel", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[25].getnombre().toLowerCase(), ciudades[25].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -437,7 +435,7 @@ public Tablero() {
         setButtonProperties(Mon_Cala);
         Mon_Cala.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("mon cala", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[24].getnombre().toLowerCase(), ciudades[24].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -449,7 +447,7 @@ public Tablero() {
         setButtonProperties(Lothal);
         Lothal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("lothal", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[23].getnombre().toLowerCase(), ciudades[23].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -461,7 +459,7 @@ public Tablero() {
         setButtonProperties(Nal_Hutta);
         Nal_Hutta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("nal hutta", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[22].getnombre().toLowerCase(), ciudades[22].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -473,7 +471,7 @@ public Tablero() {
         setButtonProperties(Taris);
         Taris.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("taris", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[21].getnombre().toLowerCase(), ciudades[21].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -485,7 +483,7 @@ public Tablero() {
         setButtonProperties(Felucia);
         Felucia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("felucia", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[20].getnombre().toLowerCase(), ciudades[20].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -497,7 +495,7 @@ public Tablero() {
         setButtonProperties(Dantooine);
         Dantooine.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("dantooine", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[19].getnombre().toLowerCase(), ciudades[19].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -509,7 +507,7 @@ public Tablero() {
         setButtonProperties(Mandalore);
         Mandalore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("Mandalore", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[18].getnombre().toLowerCase(), ciudades[18].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -521,7 +519,7 @@ public Tablero() {
         setButtonProperties(Ryloth);
         Ryloth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("ryloth", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[17].getnombre().toLowerCase(), ciudades[17].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -533,7 +531,7 @@ public Tablero() {
         setButtonProperties(Sullust);
         Sullust.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("sullust", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[16].getnombre().toLowerCase(), ciudades[16].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -545,7 +543,7 @@ public Tablero() {
         setButtonProperties(Corellia);
         Corellia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("corellia", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[15].getnombre().toLowerCase(), ciudades[15].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -557,7 +555,7 @@ public Tablero() {
         setButtonProperties(Chandrilla);
         Chandrilla.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("chandrilla", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[14].getnombre().toLowerCase(), ciudades[14].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -569,7 +567,7 @@ public Tablero() {
         setButtonProperties(Jakku);
         Jakku.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("jakku", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[13].getnombre().toLowerCase(), ciudades[13].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -581,7 +579,7 @@ public Tablero() {
         setButtonProperties(Utapau);
         Utapau.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("utapau", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[12].getnombre().toLowerCase(), ciudades[12].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -593,7 +591,7 @@ public Tablero() {
         setButtonProperties(Yavin);
         Yavin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("yavin", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[11].getnombre().toLowerCase(), ciudades[11].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -605,7 +603,7 @@ public Tablero() {
         setButtonProperties(Dagobah);
         Dagobah.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("dagobah", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[10].getnombre().toLowerCase(), ciudades[10].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -617,7 +615,7 @@ public Tablero() {
         setButtonProperties(Mustafar);
         Mustafar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("mustafar", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[9].getnombre().toLowerCase(), ciudades[9].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -629,7 +627,7 @@ public Tablero() {
         setButtonProperties(Geonosis);
         Geonosis.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("geonosis", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[8].getnombre().toLowerCase(), ciudades[8].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -641,7 +639,7 @@ public Tablero() {
         setButtonProperties(Kamino);
         Kamino.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("kamino", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[7].getnombre().toLowerCase(), ciudades[7].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -653,7 +651,7 @@ public Tablero() {
         setButtonProperties(Naboo);
         Naboo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("naboo", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[6].getnombre().toLowerCase(), ciudades[6].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -665,7 +663,7 @@ public Tablero() {
         setButtonProperties(Hoth);
         Hoth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("hoth", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[5].getnombre().toLowerCase(), ciudades[5].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -677,7 +675,7 @@ public Tablero() {
         setButtonProperties(Endor);
         Endor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("endor", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[4].getnombre().toLowerCase(), ciudades[4].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -689,7 +687,7 @@ public Tablero() {
         setButtonProperties(Kashyyyk);
         Kashyyyk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("kashyyyk", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[3].getnombre().toLowerCase(), ciudades[3].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -701,7 +699,7 @@ public Tablero() {
         setButtonProperties(Alderaan);
         Alderaan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("alderaan", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[2].getnombre().toLowerCase(), ciudades[2].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -713,7 +711,7 @@ public Tablero() {
         setButtonProperties(Tatooine);
         Tatooine.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("tatooine", 3); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[1].getnombre().toLowerCase(), ciudades[1].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
@@ -725,14 +723,14 @@ public Tablero() {
         setButtonProperties(Coruscant);
         Coruscant.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mostrarVentana("coruscant", 3); // Mostrar la ventana con la información
+                mostrarVentana(ciudades[0].getnombre().toLowerCase(), ciudades[0].getinfeccion()); // Mostrar la ventana con la información
             }
         });
         
         JLabel Mapa = new JLabel("");
         Mapa.setForeground(new Color(0, 128, 255));
         Mapa.setBounds(0, 0, 1264, 985);
-        Mapa.setIcon(new ImageIcon("F:\\ILERNA\\M03 PROGRAMACIÓ\\UF1\\CONQUISTA ESTELAR\\Mapa_conquista_final.jpg"));
+        Mapa.setIcon(new ImageIcon("Mapa_conquista_final.jpg"));
         getContentPane().add(Mapa);
               
         setVisible(true);
