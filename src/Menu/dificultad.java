@@ -110,6 +110,10 @@ public class dificultad extends JFrame implements ActionListener {
 			String linea = "";
 			String linea1 = "";
 			int infectadas = 0;
+			int infectadasRonda = 0;
+			int enfActDerr = 0;
+			int brotDerr = 0;
+			int porcVac = 0;
 			int i = 0;
 			int j = 0;
 			File NomFit = new File("modo_facil.xml");
@@ -130,15 +134,24 @@ public class dificultad extends JFrame implements ActionListener {
 				linea = br.readLine();
 				linea = br.readLine();
 				
-				for(i = 0; i < linea.length() - 1; i++) {
-					if(linea.charAt(i) == '>') {
-						i++;
-						while(linea.charAt(i) != '<') {
-							linea1 = linea1 + linea.charAt(i);
-							i++;
-						}
-					}
-				}		
+				linea1 = devolverValor(fr, br, linea);	
+				infectadas = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				infectadasRonda = Integer.valueOf(linea1);
+
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				enfActDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				brotDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				porcVac = Integer.valueOf(linea1);
 				
 				br.close();
 				fr.close();
@@ -146,14 +159,14 @@ public class dificultad extends JFrame implements ActionListener {
 				System.out.println("Error E/S: " + e);	
 			}
 			
-			infectadas = Integer.valueOf(linea1);
-			System.out.println(infectadas);
+
 			i = 0;
 			while(j != infectadas) {
 				if((int)(Math.random()*20) == 2) {
 					
 					if(ciudades[i].getinfeccion() == 0) {
 						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+						JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
 						j++;
 					}
 				}
@@ -166,7 +179,7 @@ public class dificultad extends JFrame implements ActionListener {
 				
 			}
 			
-			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
 			dispose();
 			
 		}
@@ -176,6 +189,10 @@ public class dificultad extends JFrame implements ActionListener {
 			String linea = "";
 			String linea1 = "";
 			int infectadas = 0;
+			int infectadasRonda = 0;
+			int enfActDerr = 0;
+			int brotDerr = 0;
+			int porcVac = 0;
 			int i = 0;
 			int j = 0;
 			File NomFit = new File("modo_normal.xml");
@@ -198,15 +215,24 @@ public class dificultad extends JFrame implements ActionListener {
 				linea = br.readLine();
 				linea = br.readLine();
 				
-				for(i = 0; i < linea.length() - 1; i++) {
-					if(linea.charAt(i) == '>') {
-						i++;
-						while(linea.charAt(i) != '<') {
-							linea1 = linea1 + linea.charAt(i);
-							i++;
-						}
-					}
-				}		
+				linea1 = devolverValor(fr, br, linea);	
+				infectadas = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				infectadasRonda = Integer.valueOf(linea1);
+
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				enfActDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				brotDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				porcVac = Integer.valueOf(linea1);
 				
 				br.close();
 				fr.close();
@@ -233,7 +259,7 @@ public class dificultad extends JFrame implements ActionListener {
 				}
 				
 			}
-			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
 			dispose();
 			
 		}
@@ -242,8 +268,13 @@ public class dificultad extends JFrame implements ActionListener {
 			String linea = "";
 			String linea1 = "";
 			int infectadas = 0;
+			int infectadasRonda = 0;
+			int enfActDerr = 0;
+			int brotDerr = 0;
+			int porcVac = 0;
 			int i = 0;
 			int j = 0;
+
 			File NomFit = new File("modo_dificil.xml");
 			
 			Ciudad[] ciudades = new Ciudad[48];
@@ -264,15 +295,24 @@ public class dificultad extends JFrame implements ActionListener {
 				linea = br.readLine();
 				linea = br.readLine();
 				
-				for(i = 0; i < linea.length() - 1; i++) {
-					if(linea.charAt(i) == '>') {
-						i++;
-						while(linea.charAt(i) != '<') {
-							linea1 = linea1 + linea.charAt(i);
-							i++;
-						}
-					}
-				}		
+				linea1 = devolverValor(fr, br, linea);	
+				infectadas = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				infectadasRonda = Integer.valueOf(linea1);
+
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				enfActDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				brotDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				porcVac = Integer.valueOf(linea1);
 				
 				br.close();
 				fr.close();
@@ -299,7 +339,7 @@ public class dificultad extends JFrame implements ActionListener {
 				}
 				
 			}
-			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
 			dispose();
 			
 		}
@@ -308,6 +348,10 @@ public class dificultad extends JFrame implements ActionListener {
 			String linea = "";
 			String linea1 = "";
 			int infectadas = 0;
+			int infectadasRonda = 0;
+			int enfActDerr = 0;
+			int brotDerr = 0;
+			int porcVac = 0;
 			int i = 0;
 			int j = 0;
 			File NomFit = new File("modo_personalizado.xml");
@@ -358,15 +402,24 @@ public class dificultad extends JFrame implements ActionListener {
 				linea = br.readLine();
 				linea = br.readLine();
 				
-				for(i = 0; i < linea.length() - 1; i++) {
-					if(linea.charAt(i) == '>') {
-						i++;
-						while(linea.charAt(i) != '<') {
-							linea1 = linea1 + linea.charAt(i);
-							i++;
-						}
-					}
-				}		
+				linea1 = devolverValor(fr, br, linea);	
+				infectadas = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				infectadasRonda = Integer.valueOf(linea1);
+
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				enfActDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				brotDerr = Integer.valueOf(linea1);
+				
+				linea  = br.readLine();
+				linea1 = devolverValor(fr, br, linea);
+				porcVac = Integer.valueOf(linea1);
 				
 				br.close();
 				fr.close();
@@ -393,7 +446,7 @@ public class dificultad extends JFrame implements ActionListener {
 				}
 				
 			}
-			Tablero tab = new Tablero(ciudades, viruses, vacuna);
+			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
 			dispose();
 
 		}
@@ -732,6 +785,30 @@ public class dificultad extends JFrame implements ActionListener {
 			
 			return lineaTot;
 			
+		}
+		
+		public static String devolverValor(FileReader fr, BufferedReader br, String linea) {
+			
+			String linea1 = "";
+			int i = 0;
+			
+			try {
+				//System.out.println("Prueba 2: " + linea);
+				for(i = 0; i < linea.length() - 1; i++) {
+					if(linea.charAt(i) == '>') {
+						i++;
+						while(linea.charAt(i) != '<') {
+							linea1 = linea1 + linea.charAt(i);
+							i++;
+						}
+					}
+				}		
+
+			} catch (Exception e) {
+				System.out.println("Hola:" + e);	
+			}
+			
+			return linea1;
 		}
 		
 	    private void setButtonProperties(JButton button) {
