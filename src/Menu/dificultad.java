@@ -159,7 +159,6 @@ public class dificultad extends JFrame implements ActionListener {
 				System.out.println("Error E/S: " + e);	
 			}
 			
-
 			i = 0;
 			while(j != infectadas) {
 				if((int)(Math.random()*20) == 2) {
@@ -240,8 +239,6 @@ public class dificultad extends JFrame implements ActionListener {
 				System.out.println("Error E/S: " + e);	
 			}
 			
-			infectadas = Integer.valueOf(linea1);
-			
 			i = 0;
 			while(j != infectadas) {
 				if((int)(Math.random()*20) == 2) {
@@ -319,8 +316,6 @@ public class dificultad extends JFrame implements ActionListener {
 			} catch (Exception e) {
 				System.out.println("Error E/S: " + e);	
 			}
-			
-			infectadas = Integer.valueOf(linea1);
 			
 			i = 0;
 			while(j != infectadas) {
@@ -426,8 +421,6 @@ public class dificultad extends JFrame implements ActionListener {
 			} catch (Exception e) {
 				System.out.println("Error E/S: " + e);	
 			}
-			
-			infectadas = Integer.valueOf(linea1);
 			
 			i = 0;
 			while(j != infectadas) {
