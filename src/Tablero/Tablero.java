@@ -20,6 +20,10 @@ public class Tablero extends JFrame {
 	int ronda = 1;
 	JLabel Rondas = new JLabel("ronda 1");
 	JLabel Acciones = new JLabel("acciones: 4");
+    JProgressBar progressBar_Vader = new JProgressBar();
+    JProgressBar progressBar_Grievous = new JProgressBar();
+    JProgressBar progressBar_Maul = new JProgressBar();
+    JProgressBar progressBar_Sidious = new JProgressBar();
 	
 	public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac) {
 	
@@ -54,6 +58,63 @@ public class Tablero extends JFrame {
         getContentPane().add(Investigar);
         Investigar.setFont(buttonFont);
         setButtonProperties(Investigar);
+        Investigar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame ventanaSecundaria = new JFrame("Selección investigación");
+                ventanaSecundaria.getContentPane().setLayout(new GridLayout(4, 1));
+
+                
+                JButton btnDarthVader = new JButton("Darth Vader");
+                btnDarthVader.setForeground(new Color(255, 0, 0));
+                btnDarthVader.setFont(buttonFont);
+                setButtonProperties(btnDarthVader);
+                btnDarthVader.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	investigarVacuna(vacuna[0], progressBar_Vader, porcVac, ciudades, infectadasRonda);
+                    }
+                });
+                
+                JButton btnDarthMaul = new JButton("Darth Maul");
+                btnDarthMaul.setForeground(new Color(255, 255, 0));
+                btnDarthMaul.setFont(buttonFont);
+                setButtonProperties(btnDarthMaul);
+                btnDarthMaul.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	investigarVacuna(vacuna[1], progressBar_Maul, porcVac, ciudades, infectadasRonda);
+                    }
+                });
+                
+                JButton btnGeneralGrievous = new JButton("General Grievous");
+                btnGeneralGrievous.setForeground(new Color(128, 255, 0));
+                btnGeneralGrievous.setFont(buttonFont);
+                setButtonProperties(btnGeneralGrievous);
+                btnGeneralGrievous.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	investigarVacuna(vacuna[2], progressBar_Grievous, porcVac, ciudades, infectadasRonda);
+                    }
+                });
+                
+                JButton btnDarthSidious = new JButton("Darth Sidious");
+                btnDarthSidious.setForeground(new Color(0, 255, 255));
+                btnDarthSidious.setFont(buttonFont);
+                setButtonProperties(btnDarthSidious);
+                btnDarthSidious.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	investigarVacuna(vacuna[3], progressBar_Sidious, porcVac, ciudades, infectadasRonda);
+                    }
+                });
+                
+                ventanaSecundaria.getContentPane().add(btnDarthVader);
+                ventanaSecundaria.getContentPane().add(btnDarthMaul);
+                ventanaSecundaria.getContentPane().add(btnGeneralGrievous);
+                ventanaSecundaria.getContentPane().add(btnDarthSidious);
+
+                ventanaSecundaria.getContentPane().setBackground(Color.BLACK);
+                ventanaSecundaria.setSize(400, 200);
+                ventanaSecundaria.setLocationRelativeTo(null);
+                ventanaSecundaria.setVisible(true);
+            }
+        });
         
         JLabel Brotes = new JLabel("Brotes");
         Brotes.setForeground(new Color(255, 255, 255));
@@ -112,7 +173,7 @@ public class Tablero extends JFrame {
         getContentPane().add(Darth_Sidious);
         Darth_Sidious.setFont(buttonFont);
         
-        JProgressBar progressBar_Vader = new JProgressBar();
+
         progressBar_Vader.setToolTipText("");
         progressBar_Vader.setStringPainted(true);
         progressBar_Vader.setForeground(new Color(255, 0, 0));
@@ -123,9 +184,9 @@ public class Tablero extends JFrame {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_Vader.setValue(100);
         
-        JProgressBar progressBar_Grievous = new JProgressBar();
+
+        
         progressBar_Grievous.setStringPainted(true);
         progressBar_Grievous.setForeground(new Color(128, 255, 0));
         progressBar_Grievous.setBounds(319, 915, 250, 30);
@@ -135,9 +196,8 @@ public class Tablero extends JFrame {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_Grievous.setValue(75);
         
-        JProgressBar progressBar_Maul = new JProgressBar();
+
         progressBar_Maul.setForeground(new Color(255, 255, 0));
         progressBar_Maul.setStringPainted(true);
         progressBar_Maul.setBounds(12, 915, 250, 30);
@@ -147,9 +207,8 @@ public class Tablero extends JFrame {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_Maul.setValue(50);
         
-        JProgressBar progressBar_Sidious = new JProgressBar();
+
         progressBar_Sidious.setForeground(new Color(0, 255, 255));
         progressBar_Sidious.setStringPainted(true);
         progressBar_Sidious.setBounds(12, 850, 250, 30);
@@ -159,11 +218,10 @@ public class Tablero extends JFrame {
                 return Color.BLACK; // Cambiamos el color del texto del porcentaje
             }
         });
-        progressBar_Sidious.setValue(25);
         
-        JButton Jedah = new JButton("jedah");
+        JButton Jedah = new JButton("jedah (" + ciudades[47].getinfeccion() + ")");
         Jedah.setForeground(new Color(255, 0, 0));
-        Jedah.setBounds(1147, 769, 125, 23);
+        Jedah.setBounds(1132, 769, 175, 23);
         getContentPane().add(Jedah);
         Jedah.setFont(buttonFont);
         setButtonProperties(Jedah);
@@ -173,9 +231,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Iego = new JButton("iego");
+        JButton Iego = new JButton("iego (" + ciudades[46].getinfeccion() + ")");
         Iego.setForeground(new Color(255, 0, 0));
-        Iego.setBounds(1113, 428, 125, 23);
+        Iego.setBounds(1076, 429, 175, 23);
         getContentPane().add(Iego);
         Iego.setFont(buttonFont);
         setButtonProperties(Iego);
@@ -185,9 +243,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Scarif = new JButton("scarif");
+        JButton Scarif = new JButton("scarif (" + ciudades[45].getinfeccion() + ")");
         Scarif.setForeground(new Color(255, 0, 0));
-        Scarif.setBounds(1076, 656, 125, 23);
+        Scarif.setBounds(1076, 656, 175, 23);
         getContentPane().add(Scarif);
         Scarif.setFont(buttonFont);
         setButtonProperties(Scarif);
@@ -197,9 +255,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Exegol = new JButton("exegol");
+        JButton Exegol = new JButton("exegol (" + ciudades[44].getinfeccion() + ")");
         Exegol.setForeground(new Color(255, 0, 0));
-        Exegol.setBounds(1040, 184, 125, 23);
+        Exegol.setBounds(1040, 184, 175, 23);
         getContentPane().add(Exegol);
         Exegol.setFont(buttonFont);
         setButtonProperties(Exegol);
@@ -209,9 +267,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Crait = new JButton("crait");
+        JButton Crait = new JButton("crait (" + ciudades[43].getinfeccion() + ")");
         Crait.setForeground(new Color(255, 0, 0));
-        Crait.setBounds(1147, 239, 125, 23);
+        Crait.setBounds(1132, 240, 175, 23);
         getContentPane().add(Crait);
         Crait.setFont(buttonFont);
         setButtonProperties(Crait);
@@ -221,9 +279,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Ahch_To = new JButton("ahch to");
+        JButton Ahch_To = new JButton("ahch to (" + ciudades[42].getinfeccion() + ")");
         Ahch_To.setForeground(new Color(255, 0, 0));
-        Ahch_To.setBounds(1103, 123, 125, 23);
+        Ahch_To.setBounds(1076, 123, 175, 23);
         getContentPane().add(Ahch_To);
         Ahch_To.setFont(buttonFont);
         setButtonProperties(Ahch_To);
@@ -233,9 +291,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Korriban = new JButton("korriban");
+        JButton Korriban = new JButton("korriban (" + ciudades[41].getinfeccion() + ")");
         Korriban.setForeground(new Color(255, 0, 0));
-        Korriban.setBounds(1103, 22, 125, 23);
+        Korriban.setBounds(1103, 22, 175, 23);
         getContentPane().add(Korriban);
         Korriban.setFont(buttonFont);
         setButtonProperties(Korriban);
@@ -245,9 +303,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Ithor = new JButton("ithor");
+        JButton Ithor = new JButton("ithor (" + ciudades[40].getinfeccion() + ")");
         Ithor.setForeground(new Color(255, 0, 0));
-        Ithor.setBounds(949, 43, 125, 23);
+        Ithor.setBounds(940, 40, 175, 23);
         getContentPane().add(Ithor);
         Ithor.setFont(buttonFont);
         setButtonProperties(Ithor);
@@ -257,9 +315,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Duro = new JButton("duro");
+        JButton Duro = new JButton("duro (" + ciudades[39].getinfeccion() + ")");
         Duro.setForeground(new Color(255, 0, 0));
-        Duro.setBounds(938, 133, 125, 23);
+        Duro.setBounds(925, 133, 175, 23);
         getContentPane().add(Duro);
         Duro.setFont(buttonFont);
         setButtonProperties(Duro);
@@ -269,9 +327,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Bothawui = new JButton("bothawui");
+        JButton Bothawui = new JButton("bothawui (" + ciudades[38].getinfeccion() + ")");
         Bothawui.setForeground(new Color(255, 0, 0));
-        Bothawui.setBounds(1006, 338, 125, 23);
+        Bothawui.setBounds(1006, 338, 175, 23);
         getContentPane().add(Bothawui);
         Bothawui.setFont(buttonFont);
         setButtonProperties(Bothawui);
@@ -281,9 +339,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Eriadu = new JButton("eriadu");
+        JButton Eriadu = new JButton("eriadu (" + ciudades[37].getinfeccion() + ")");
         Eriadu.setForeground(new Color(255, 0, 0));
-        Eriadu.setBounds(971, 552, 125, 23);
+        Eriadu.setBounds(971, 552, 175, 23);
         getContentPane().add(Eriadu);
         Eriadu.setFont(buttonFont);
         setButtonProperties(Eriadu);
@@ -293,9 +351,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Ilum = new JButton("ilum");
+        JButton Ilum = new JButton("ilum (" + ciudades[36].getinfeccion() + ")");
         Ilum.setForeground(new Color(255, 0, 0));
-        Ilum.setBounds(867, 736, 125, 23);
+        Ilum.setBounds(867, 736, 175, 23);
         getContentPane().add(Ilum);
         Ilum.setFont(buttonFont);
         setButtonProperties(Ilum);
@@ -305,9 +363,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Wayland = new JButton("wayland");
+        JButton Wayland = new JButton("wayland (" + ciudades[35].getinfeccion() + ")");
         Wayland.setForeground(new Color(128, 255, 0));
-        Wayland.setBounds(839, 598, 125, 23);
+        Wayland.setBounds(823, 604, 175, 23);
         getContentPane().add(Wayland);
         Wayland.setFont(buttonFont);
         setButtonProperties(Wayland);
@@ -317,9 +375,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Bakura = new JButton("bakura");
+        JButton Bakura = new JButton("bakura (" + ciudades[34].getinfeccion() + ")");
         Bakura.setForeground(new Color(128, 255, 0));
-        Bakura.setBounds(912, 478, 125, 23);
+        Bakura.setBounds(894, 478, 175, 23);
         getContentPane().add(Bakura);
         Bakura.setFont(buttonFont);
         setButtonProperties(Bakura);
@@ -330,9 +388,9 @@ public class Tablero extends JFrame {
         });
         
                
-        JButton Rishi = new JButton("rishi");
+        JButton Rishi = new JButton("rishi (" + ciudades[33].getinfeccion() + ")");
         Rishi.setForeground(new Color(128, 255, 0));
-        Rishi.setBounds(877, 386, 125, 23);
+        Rishi.setBounds(877, 386, 175, 23);
         getContentPane().add(Rishi);
         Rishi.setFont(buttonFont);
         setButtonProperties(Rishi);
@@ -342,9 +400,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Hapes = new JButton("hapes");
+        JButton Hapes = new JButton("hapes (" + ciudades[32].getinfeccion() + ")");
         Hapes.setForeground(new Color(128, 255, 0));
-        Hapes.setBounds(680, 563, 125, 23);
+        Hapes.setBounds(646, 573, 175, 23);
         getContentPane().add(Hapes);
         Hapes.setFont(buttonFont);
         setButtonProperties(Hapes);
@@ -354,9 +412,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Dathomir = new JButton("dathomir");
+        JButton Dathomir = new JButton("dathomir (" + ciudades[31].getinfeccion() + ")");
         Dathomir.setForeground(new Color(128, 255, 0));
-        Dathomir.setBounds(770, 449, 125, 23);
+        Dathomir.setBounds(763, 444, 175, 23);
         getContentPane().add(Dathomir);
         Dathomir.setFont(buttonFont);
         setButtonProperties(Dathomir);
@@ -366,9 +424,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Onderon = new JButton("onderon");
+        JButton Onderon = new JButton("onderon (" + ciudades[30].getinfeccion() + ")");
         Onderon.setForeground(new Color(128, 255, 0));
-        Onderon.setBounds(877, 296, 125, 23);
+        Onderon.setBounds(854, 286, 175, 23);
         getContentPane().add(Onderon);
         Onderon.setFont(buttonFont);
         setButtonProperties(Onderon);
@@ -378,9 +436,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Manaan = new JButton("manaan");
+        JButton Manaan = new JButton("manaan (" + ciudades[29].getinfeccion() + ")");
         Manaan.setForeground(new Color(128, 255, 0));
-        Manaan.setBounds(812, 207, 125, 23);
+        Manaan.setBounds(799, 208, 175, 23);
         getContentPane().add(Manaan);
         Manaan.setFont(buttonFont);
         setButtonProperties(Manaan);
@@ -390,9 +448,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Mygeeto = new JButton("mygeeto");
+        JButton Mygeeto = new JButton("mygeeto (" + ciudades[28].getinfeccion() + ")");
         Mygeeto.setForeground(new Color(128, 255, 0));
-        Mygeeto.setBounds(738, 350, 125, 23);
+        Mygeeto.setBounds(717, 352, 175, 23);
         getContentPane().add(Mygeeto);
         Mygeeto.setFont(buttonFont);
         setButtonProperties(Mygeeto);
@@ -402,9 +460,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Zeltros = new JButton("zeltros");
+        JButton Zeltros = new JButton("zeltros (" + ciudades[27].getinfeccion() + ")");
         Zeltros.setForeground(new Color(128, 255, 0));
-        Zeltros.setBounds(709, 253, 125, 23);
+        Zeltros.setBounds(697, 252, 175, 23);
         getContentPane().add(Zeltros);
         Zeltros.setFont(buttonFont);
         setButtonProperties(Zeltros);
@@ -414,9 +472,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Malachor = new JButton("malachor");
+        JButton Malachor = new JButton("malachor (" + ciudades[26].getinfeccion() + ")");
         Malachor.setForeground(new Color(128, 255, 0));
-        Malachor.setBounds(680, 499, 125, 23);
+        Malachor.setBounds(571, 510, 175, 23);
         getContentPane().add(Malachor);
         Malachor.setFont(buttonFont);
         setButtonProperties(Malachor);
@@ -426,9 +484,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Kessel = new JButton("kessel");
+        JButton Kessel = new JButton("kessel (" + ciudades[25].getinfeccion() + ")");
         Kessel.setForeground(new Color(128, 255, 0));
-        Kessel.setBounds(602, 397, 125, 23);
+        Kessel.setBounds(584, 397, 175, 23);
         getContentPane().add(Kessel);
         Kessel.setFont(buttonFont);
         setButtonProperties(Kessel);
@@ -438,9 +496,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Mon_Cala = new JButton("mon cala");
+        JButton Mon_Cala = new JButton("mon cala (" + ciudades[24].getinfeccion() + ")");
         Mon_Cala.setForeground(new Color(128, 255, 0));
-        Mon_Cala.setBounds(568, 286, 125, 23);
+        Mon_Cala.setBounds(558, 286, 175, 23);
         getContentPane().add(Mon_Cala);
         Mon_Cala.setFont(buttonFont);
         setButtonProperties(Mon_Cala);
@@ -450,9 +508,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Lothal = new JButton("lothal");
+        JButton Lothal = new JButton("lothal (" + ciudades[23].getinfeccion() + ")");
         Lothal.setForeground(new Color(255, 255, 0));
-        Lothal.setBounds(462, 780, 125, 23);
+        Lothal.setBounds(448, 786, 175, 23);
         getContentPane().add(Lothal);
         Lothal.setFont(buttonFont);
         setButtonProperties(Lothal);
@@ -462,9 +520,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Nal_Hutta = new JButton("nal hutta");
+        JButton Nal_Hutta = new JButton("nal hutta (" + ciudades[22].getinfeccion() + ")");
         Nal_Hutta.setForeground(new Color(255, 255, 0));
-        Nal_Hutta.setBounds(491, 619, 125, 23);
+        Nal_Hutta.setBounds(491, 619, 175, 23);
         getContentPane().add(Nal_Hutta);
         Nal_Hutta.setFont(buttonFont);
         setButtonProperties(Nal_Hutta);
@@ -474,9 +532,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Taris = new JButton("taris");
+        JButton Taris = new JButton("taris (" + ciudades[21].getinfeccion() + ")");
         Taris.setForeground(new Color(255, 255, 0));
-        Taris.setBounds(340, 680, 89, 23);
+        Taris.setBounds(319, 680, 175, 23);
         getContentPane().add(Taris);
         Taris.setFont(buttonFont);
         setButtonProperties(Taris);
@@ -486,9 +544,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Felucia = new JButton("felucia");
+        JButton Felucia = new JButton("felucia (" + ciudades[20].getinfeccion() + ")");
         Felucia.setForeground(new Color(255, 255, 0));
-        Felucia.setBounds(419, 466, 125, 23);
+        Felucia.setBounds(403, 466, 175, 23);
         getContentPane().add(Felucia);
         Felucia.setFont(buttonFont);
         setButtonProperties(Felucia);
@@ -498,9 +556,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Dantooine = new JButton("dantooine");
+        JButton Dantooine = new JButton("dantooine (" + ciudades[19].getinfeccion() + ")");
         Dantooine.setForeground(new Color(255, 255, 0));
-        Dantooine.setBounds(284, 466, 125, 23);
+        Dantooine.setBounds(270, 466, 175, 23);
         getContentPane().add(Dantooine);
         Dantooine.setFont(buttonFont);
         setButtonProperties(Dantooine);
@@ -510,9 +568,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Mandalore = new JButton("mandalore");
+        JButton Mandalore = new JButton("mandalore (" + ciudades[18].getinfeccion() + ")");
         Mandalore.setForeground(new Color(255, 255, 0));
-        Mandalore.setBounds(127, 563, 135, 23);
+        Mandalore.setBounds(127, 563, 175, 23);
         getContentPane().add(Mandalore);
         Mandalore.setFont(buttonFont);
         setButtonProperties(Mandalore);
@@ -522,9 +580,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Ryloth = new JButton("ryloth");
+        JButton Ryloth = new JButton("ryltoh (" + ciudades[17].getinfeccion() + ")");
         Ryloth.setForeground(new Color(255, 255, 0));
-        Ryloth.setBounds(54, 747, 125, 23);
+        Ryloth.setBounds(42, 748, 175, 23);
         getContentPane().add(Ryloth);
         Ryloth.setFont(buttonFont);
         setButtonProperties(Ryloth);
@@ -534,9 +592,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Sullust = new JButton("sullust");
+        JButton Sullust = new JButton("sullust (" + ciudades[16].getinfeccion() + ")");
         Sullust.setForeground(new Color(255, 255, 0));
-        Sullust.setBounds(54, 478, 125, 23);
+        Sullust.setBounds(54, 466, 175, 23);
         getContentPane().add(Sullust);
         Sullust.setFont(buttonFont);
         setButtonProperties(Sullust);
@@ -546,9 +604,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Corellia = new JButton("corellia");
+        JButton Corellia = new JButton("corellia (" + ciudades[15].getinfeccion() + ")");
         Corellia.setForeground(new Color(255, 255, 0));
-        Corellia.setBounds(284, 308, 125, 23);
+        Corellia.setBounds(284, 308, 175, 23);
         getContentPane().add(Corellia);
         Corellia.setFont(buttonFont);
         setButtonProperties(Corellia);
@@ -558,9 +616,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Chandrilla = new JButton("chandrilla");
+        JButton Chandrilla = new JButton("chandrilla (" + ciudades[14].getinfeccion() + ")");
         Chandrilla.setForeground(new Color(255, 255, 0));
-        Chandrilla.setBounds(182, 253, 135, 23);
+        Chandrilla.setBounds(182, 253, 175, 23);
         getContentPane().add(Chandrilla);
         Chandrilla.setFont(buttonFont);
         setButtonProperties(Chandrilla);
@@ -570,9 +628,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Jakku = new JButton("jakku");
+        JButton Jakku = new JButton("jakku (" + ciudades[13].getinfeccion() + ")");
         Jakku.setForeground(new Color(255, 255, 0));
-        Jakku.setBounds(295, 228, 125, 23);
+        Jakku.setBounds(284, 228, 175, 23);
         getContentPane().add(Jakku);
         Jakku.setFont(buttonFont);
         setButtonProperties(Jakku);
@@ -582,9 +640,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Utapau = new JButton("utapau");
+        JButton Utapau = new JButton("utapau (" + ciudades[12].getinfeccion() + ")");
         Utapau.setForeground(new Color(255, 255, 0));
-        Utapau.setBounds(54, 184, 125, 23);
+        Utapau.setBounds(42, 184, 175, 23);
         getContentPane().add(Utapau);
         Utapau.setFont(buttonFont);
         setButtonProperties(Utapau);
@@ -594,9 +652,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Yavin = new JButton("yavin");
+        JButton Yavin = new JButton("yavin (" + ciudades[11].getinfeccion() + ")");
         Yavin.setForeground(new Color(0, 255, 255));
-        Yavin.setBounds(829, 22, 125, 23);
+        Yavin.setBounds(812, 22, 175, 23);
         getContentPane().add(Yavin);
         Yavin.setFont(buttonFont);
         setButtonProperties(Yavin);
@@ -606,9 +664,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Dagobah = new JButton("dagobah");
+        JButton Dagobah = new JButton("dagobah (" + ciudades[10].getinfeccion() + ")");
         Dagobah.setForeground(new Color(0, 255, 255));
-        Dagobah.setBounds(626, 161, 125, 23);
+        Dagobah.setBounds(602, 161, 175, 23);
         getContentPane().add(Dagobah);
         Dagobah.setFont(buttonFont);
         setButtonProperties(Dagobah);
@@ -618,9 +676,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Mustafar = new JButton("mustafar");
+        JButton Mustafar = new JButton("mustafar (" + ciudades[9].getinfeccion() + ")");
         Mustafar.setForeground(new Color(0, 255, 255));
-        Mustafar.setBounds(709, 67, 125, 23);
+        Mustafar.setBounds(697, 67, 175, 23);
         getContentPane().add(Mustafar);
         Mustafar.setFont(buttonFont);
         setButtonProperties(Mustafar);
@@ -630,9 +688,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Geonosis = new JButton("geonosis");
+        JButton Geonosis = new JButton("geonosis (" + ciudades[8].getinfeccion() + ")");
         Geonosis.setForeground(new Color(0, 255, 255));
-        Geonosis.setBounds(614, 123, 125, 23);
+        Geonosis.setBounds(602, 123, 175, 23);
         getContentPane().add(Geonosis);
         Geonosis.setFont(buttonFont);
         setButtonProperties(Geonosis);
@@ -642,9 +700,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Kamino = new JButton("kamino");
+        JButton Kamino = new JButton("kamino (" + ciudades[7].getinfeccion() + ")");
         Kamino.setForeground(new Color(0, 255, 255));
-        Kamino.setBounds(385, 194, 125, 23);
+        Kamino.setBounds(354, 194, 175, 23);
         getContentPane().add(Kamino);
         Kamino.setFont(buttonFont);
         setButtonProperties(Kamino);
@@ -654,9 +712,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Naboo = new JButton("naboo");
+        JButton Naboo = new JButton("naboo (" + ciudades[6].getinfeccion() + ")");
         Naboo.setForeground(new Color(0, 255, 255));
-        Naboo.setBounds(602, 11, 125, 23);
+        Naboo.setBounds(584, 11, 175, 23);
         getContentPane().add(Naboo);
         Naboo.setFont(buttonFont);
         setButtonProperties(Naboo);
@@ -666,9 +724,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Hoth = new JButton("hoth");
+        JButton Hoth = new JButton("hoth (" + ciudades[5].getinfeccion() + ")");
         Hoth.setForeground(new Color(0, 255, 255));
-        Hoth.setBounds(366, 133, 89, 23);
+        Hoth.setBounds(319, 133, 175, 23);
         getContentPane().add(Hoth);
         Hoth.setFont(buttonFont);
         setButtonProperties(Hoth);
@@ -678,9 +736,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Endor = new JButton("endor");
+        JButton Endor = new JButton("endor (" + ciudades[4].getinfeccion() + ")");
         Endor.setForeground(new Color(0, 255, 255));
-        Endor.setBounds(462, 82, 125, 23);
+        Endor.setBounds(448, 82, 175, 23);
         getContentPane().add(Endor);
         Endor.setFont(buttonFont);
         setButtonProperties(Endor);
@@ -690,21 +748,20 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Kashyyyk = new JButton("kashyyyk");
+        JButton Kashyyyk = new JButton("kashyyyk (" + ciudades[3].getinfeccion() + ")");
         Kashyyyk.setForeground(new Color(0, 255, 255));
-        Kashyyyk.setBounds(352, 0, 125, 23);
+        Kashyyyk.setBounds(340, 0, 175, 23);
         getContentPane().add(Kashyyyk);
         Kashyyyk.setFont(buttonFont);
         setButtonProperties(Kashyyyk);
-        Kashyyyk.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        Kashyyyk.addActionListener(new ActionListener() {          public void actionPerformed(ActionEvent e) {
             	mostrarVentana(ciudades[3], ciudades, infectadasRonda); // Mostrar la ventana con la información
             }
         });
         
-        JButton Alderaan = new JButton("alderaan");
+        JButton Alderaan = new JButton("alderaan (" + ciudades[2].getinfeccion() + ")");
         Alderaan.setForeground(new Color(0, 255, 255));
-        Alderaan.setBounds(237, 143, 125, 23);
+        Alderaan.setBounds(228, 143, 175, 23);
         getContentPane().add(Alderaan);
         Alderaan.setFont(buttonFont);
         setButtonProperties(Alderaan);
@@ -714,9 +771,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Tatooine = new JButton("tatooine");
+        JButton Tatooine = new JButton("tatooine (" + ciudades[1].getinfeccion() + ")");
         Tatooine.setForeground(new Color(0, 255, 255));
-        Tatooine.setBounds(196, 33, 125, 23);
+        Tatooine.setBounds(182, 40, 175, 23);
         getContentPane().add(Tatooine);
         Tatooine.setFont(buttonFont);
         setButtonProperties(Tatooine);
@@ -726,9 +783,9 @@ public class Tablero extends JFrame {
             }
         });
         
-        JButton Coruscant = new JButton("coruscant");
+        JButton Coruscant = new JButton("coruscant (" + ciudades[0].getinfeccion() + ")");
         Coruscant.setForeground(new Color(0, 255, 255));
-        Coruscant.setBounds(29, 22, 125, 23);
+        Coruscant.setBounds(12, 22, 175, 23);
         getContentPane().add(Coruscant);
         Coruscant.setFont(buttonFont);
         setButtonProperties(Coruscant);
@@ -741,7 +798,7 @@ public class Tablero extends JFrame {
         JLabel Mapa = new JLabel("");
         Mapa.setForeground(new Color(0, 128, 255));
         Mapa.setBounds(0, 0, 1264, 985);
-        Mapa.setIcon(new ImageIcon("Mapa_conquista_final.jpg"));
+        Mapa.setIcon(new ImageIcon("F:\\ILERNA\\CONQUISTA-ESTELAR\\Pandemic\\Mapa_conquista_final.jpg"));
         getContentPane().add(Mapa);
               
         setVisible(true);
@@ -785,10 +842,9 @@ public class Tablero extends JFrame {
                 		modifcarAcciones();
                 		pasarRonda();
                 		infectarCiudades(ciudades, infectadasRonda);
-                		//JOptionPane.showMessageDialog(null, "Ronda " + ronda);
             		}
             	}else if(ciudad.getinfeccion() == 0 && acciones != 0){
-            		JOptionPane.showMessageDialog(null, "No puedes reconquistar ya que ya es 0");
+            		JOptionPane.showMessageDialog(null, "Este planeta no esta conquistado");
             	}
                 
             }
@@ -801,10 +857,8 @@ public class Tablero extends JFrame {
 	    etiquetaNivel.setFont(buttonFont);
 	    reconquistarButton.setFont(buttonFont);
 	    
-	    // Configurar el color de fondo de la ventana
 	    ventana.getContentPane().setBackground(Color.BLACK);
 
-	    // Configurar el color del texto de las etiquetas y del botón
 	    etiquetaCiudad.setForeground(Color.WHITE);
 	    etiquetaNivel.setForeground(Color.WHITE);
 	    reconquistarButton.setForeground(Color.WHITE);
@@ -861,4 +915,18 @@ public class Tablero extends JFrame {
 		Rondas.setText("ronda " + ronda);
 	}
 
+	private void investigarVacuna(Vacunas vacuna, JProgressBar prog, int porcVac, Ciudad[] ciudades, int infectadasRonda) {
+		if(vacuna.getporcentaje() >= 100) {
+			JOptionPane.showMessageDialog(null, "Ya esta investigado");
+		}else if(acciones !=4){
+			JOptionPane.showMessageDialog(null, "No puedes investigar, no tienes acciones suficientes");
+		}else {
+			vacuna.setporcentaje( vacuna.getporcentaje() + porcVac);
+			prog.setValue(vacuna.getporcentaje());
+			ronda++;
+			modifcarAcciones();
+    		pasarRonda();
+    		infectarCiudades(ciudades, infectadasRonda);
+		}
+	}
 }

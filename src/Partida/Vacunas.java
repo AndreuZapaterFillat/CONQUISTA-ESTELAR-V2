@@ -4,7 +4,7 @@ public class Vacunas {
 
 	String nombre;
 	String color;
-	Float porcentaje;
+	int porcentaje;
 	
 	
 	// Getters
@@ -14,7 +14,7 @@ public class Vacunas {
 	public String getcolor() {
 		return this.color;
 	}
-	public Float getporcentaje() {
+	public int getporcentaje() {
 		return this.porcentaje;
 	}
 	
@@ -26,7 +26,7 @@ public class Vacunas {
 	public void setcolor(String c) {
 		this.color = c;
 	}
-	public void setporcentaje(Float p) {
+	public void setporcentaje(int p) {
 		this.porcentaje = p;
 	}
 

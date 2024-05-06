@@ -571,7 +571,7 @@ public class dificultad extends JFrame implements ActionListener {
 		for(i = 0; i < 4; i++) {
 			vacuna[i] = new Vacunas();
 			vacuna[i].setcolor(colores[i]);
-			vacuna[i].setporcentaje((float)0);
+			vacuna[i].setporcentaje(0);
 			vacuna[i].setnombre(imperio[i]);
 		}
 			
