@@ -7,6 +7,7 @@ public class Ciudad {
 	String enfermedad;
 	int infeccion;
 	public String [] ciudadesColindantes;
+	public boolean brotada = false;
 	
 	
 	// Getters

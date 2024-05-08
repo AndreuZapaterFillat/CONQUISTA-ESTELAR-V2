@@ -2,8 +2,6 @@ package Menu;
 
 import javax.swing.*;
 import javax.sound.sampled.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -33,7 +31,7 @@ public class menu extends JFrame{
         NuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dificultad dif = new dificultad();
-				setVisible(false);
+				dispose();
 			}
 		});
               

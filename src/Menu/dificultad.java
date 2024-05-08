@@ -159,14 +159,13 @@ public class dificultad extends JFrame implements ActionListener {
 				System.out.println("Error E/S: " + e);	
 			}
 			
-
 			i = 0;
 			while(j != infectadas) {
 				if((int)(Math.random()*20) == 2) {
 					
 					if(ciudades[i].getinfeccion() == 0) {
 						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
-						JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
+						//JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
 						j++;
 					}
 				}
@@ -239,8 +238,6 @@ public class dificultad extends JFrame implements ActionListener {
 			} catch (Exception e) {
 				System.out.println("Error E/S: " + e);	
 			}
-			
-			infectadas = Integer.valueOf(linea1);
 			
 			i = 0;
 			while(j != infectadas) {
@@ -320,14 +317,13 @@ public class dificultad extends JFrame implements ActionListener {
 				System.out.println("Error E/S: " + e);	
 			}
 			
-			infectadas = Integer.valueOf(linea1);
-			
 			i = 0;
 			while(j != infectadas) {
 				if((int)(Math.random()*20) == 2) {
 					
 					if(ciudades[i].getinfeccion() == 0) {
 						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+						System.out.println(ciudades[i].getnombre());
 						j++;
 					}
 				}
@@ -427,14 +423,13 @@ public class dificultad extends JFrame implements ActionListener {
 				System.out.println("Error E/S: " + e);	
 			}
 			
-			infectadas = Integer.valueOf(linea1);
-			
 			i = 0;
 			while(j != infectadas) {
 				if((int)(Math.random()*20) == 2) {
 					
 					if(ciudades[i].getinfeccion() == 0) {
 						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+						System.out.println(ciudades[i].getnombre());
 						j++;
 					}
 				}
@@ -470,9 +465,10 @@ public class dificultad extends JFrame implements ActionListener {
 			int [] val = new int[1];
 			int [] coord = new int[2];
 			imperio.add("Darth Sidious");
-			imperio.add("Darth Vader");
-			imperio.add("General Grievous");
 			imperio.add("Darth Maul");
+			imperio.add("General Grievous");
+			imperio.add("Darth Vader");
+			
 			
 		
 			try {
@@ -545,8 +541,8 @@ public class dificultad extends JFrame implements ActionListener {
 			Virus[] viruses = new Virus [4];
 			int i = 0;
 			String id = "";
-			String[] colores = new String [] {"azul", "rojo", "verde", "amarillo"};
-			String[] imperio = new String [] {"Darth Sidious", "Darth Vader", "General Grievous", "Darth Maul"};
+			String[] colores = new String [] {"azul", "amarillo", "verde", "rojo"};
+			String[] imperio = new String [] {"Darth Sidious", "Darth Maul", "General Grievous",  "Darth Vader" };
 	
 		
 			for(i = 0; i < 4; i++) {
@@ -565,13 +561,13 @@ public class dificultad extends JFrame implements ActionListener {
 		public static Vacunas[] llenarVacunas() {
 		Vacunas [] vacuna = new Vacunas [4];
 		int i = 0;
-		String[] colores = new String [] {"azul", "rojo", "verde", "amarillo"};
-		String[] imperio = new String [] {"Inutilización de Darth Sidious", "Inutilización de Darth Vader", "Inutilización de General Grievous", "Inutilización de Darth Maul"};
+		String[] colores = new String [] {"azul", "amarillo", "verde", "rojo"};
+		String[] imperio = new String [] {"Darth Sidious", "Darth Maul", "General Grievous",  "Darth Vader" };
 			
 		for(i = 0; i < 4; i++) {
 			vacuna[i] = new Vacunas();
 			vacuna[i].setcolor(colores[i]);
-			vacuna[i].setporcentaje((float)0);
+			vacuna[i].setporcentaje(0);
 			vacuna[i].setnombre(imperio[i]);
 		}
 			
