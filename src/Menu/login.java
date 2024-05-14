@@ -165,7 +165,7 @@ public class login extends JFrame implements ActionListener{
 				if(Select[0].charAt(0) != '0') {
 					JOptionPane.showMessageDialog(null, "Credenciales correctos.\nIniciando Conquista Estelar");
 					 //setVisible(false);
-					 menu men = new menu();
+					 menu men = new menu(usuario,contra);
 					 dispose();
 				}else {
 					 reply = JOptionPane.showConfirmDialog(null,
@@ -178,7 +178,7 @@ public class login extends JFrame implements ActionListener{
 						bbdd.insert(con, "INSERT INTO LOGIN_PANDEMIC (usuario,contra) VALUES ('" + usuario + "','"+ contra + "')");
 					    JOptionPane.showMessageDialog(null, "Creado con éxito.\nIniciando Conquista Estelar");
 					    //setVisible(false);
-					    menu men = new menu();
+					    menu men = new menu(usuario,contra);
 					    dispose();
 					}else {
 						message.setText("");

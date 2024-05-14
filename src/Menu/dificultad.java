@@ -31,11 +31,11 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 
-public class dificultad extends JFrame implements ActionListener {
+public class dificultad extends JFrame{
 
 	JButton facil, normal, dificil, personalizado;
 	
-	public dificultad() {
+	public dificultad(String usuario, String contra) {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1280,1024);
@@ -62,7 +62,87 @@ public class dificultad extends JFrame implements ActionListener {
 		getContentPane().add(facil);
 		facil.setFont(buttonFont);
         setButtonProperties(facil);
-		facil.addActionListener(this);
+		facil.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String linea = "";
+				String linea1 = "";
+				int infectadas = 0;
+				int infectadasRonda = 0;
+				int enfActDerr = 0;
+				int brotDerr = 0;
+				int porcVac = 0;
+				int i = 0;
+				int j = 0;
+				File NomFit = new File("modo_facil.xml");
+				
+				Ciudad[] ciudades = new Ciudad[48];
+				Virus[] viruses = new Virus [4];
+				Vacunas [] vacuna = new Vacunas [4];
+				
+				ciudades = llenarCiudades();
+				viruses = llenarVirus();
+				vacuna = llenarVacunas();
+		
+				try {
+					FileReader fr = new FileReader(NomFit);
+					BufferedReader br = new BufferedReader(fr);
+					
+					linea = br.readLine();
+					linea = br.readLine();
+					linea = br.readLine();
+					
+					linea1 = devolverValor(fr, br, linea);	
+					infectadas = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					infectadasRonda = Integer.valueOf(linea1);
+
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					enfActDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					brotDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					porcVac = Integer.valueOf(linea1);
+					
+					br.close();
+					fr.close();
+				} catch (Exception e1) {
+					System.out.println("Error E/S1: " + e1);	
+				}
+				
+				i = 0;
+				while(j != infectadas) {
+					if((int)(Math.random()*20) == 2) {
+						
+						if(ciudades[i].getinfeccion() == 0) {
+							ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+							//JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
+							j++;
+						}
+					}
+					
+					if(i == 47) {
+						i = 0;
+					}else {
+						i++;
+					}
+					
+				}
+				
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				dispose();
+				
+			}
+		});
 		
 		normal = new JButton("Normal");
 		normal.setForeground(new Color(255, 255, 255));
@@ -70,7 +150,86 @@ public class dificultad extends JFrame implements ActionListener {
 		getContentPane().add(normal);
 		normal.setFont(buttonFont);
         setButtonProperties(normal);
-		normal.addActionListener(this);
+		normal.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String linea = "";
+				String linea1 = "";
+				int infectadas = 0;
+				int infectadasRonda = 0;
+				int enfActDerr = 0;
+				int brotDerr = 0;
+				int porcVac = 0;
+				int i = 0;
+				int j = 0;
+				File NomFit = new File("modo_normal.xml");
+				
+				Ciudad[] ciudades = new Ciudad[48];
+				Virus[] viruses = new Virus [4];
+				Vacunas [] vacuna = new Vacunas [4];
+				
+				ciudades = llenarCiudades();
+				viruses = llenarVirus();
+				vacuna = llenarVacunas();
+				
+				
+				linea1 = "";
+				try {
+					FileReader fr = new FileReader(NomFit);
+					BufferedReader br = new BufferedReader(fr);
+					
+					linea = br.readLine();
+					linea = br.readLine();
+					linea = br.readLine();
+					
+					linea1 = devolverValor(fr, br, linea);	
+					infectadas = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					infectadasRonda = Integer.valueOf(linea1);
+
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					enfActDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					brotDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					porcVac = Integer.valueOf(linea1);
+					
+					br.close();
+					fr.close();
+				} catch (Exception e2) {
+					System.out.println("Error E/S2: " + e2);	
+				}
+				
+				i = 0;
+				while(j != infectadas) {
+					if((int)(Math.random()*20) == 2) {
+						
+						if(ciudades[i].getinfeccion() == 0) {
+							ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+							j++;
+						}
+					}
+					
+					if(i == 47) {
+						i = 0;
+					}else {
+						i++;
+					}
+					
+				}
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				dispose();
+				
+			}
+		});
 		
 		dificil = new JButton("Difícil");
 		dificil.setForeground(new Color(255, 255, 255));
@@ -78,7 +237,88 @@ public class dificultad extends JFrame implements ActionListener {
 		getContentPane().add(dificil);
 		dificil.setFont(buttonFont);
         setButtonProperties(dificil);
-		dificil.addActionListener(this);
+		dificil.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String linea = "";
+				String linea1 = "";
+				int infectadas = 0;
+				int infectadasRonda = 0;
+				int enfActDerr = 0;
+				int brotDerr = 0;
+				int porcVac = 0;
+				int i = 0;
+				int j = 0;
+
+				File NomFit = new File("modo_dificil.xml");
+				
+				Ciudad[] ciudades = new Ciudad[48];
+				Virus[] viruses = new Virus [4];
+				Vacunas [] vacuna = new Vacunas [4];
+				
+				ciudades = llenarCiudades();
+				viruses = llenarVirus();
+				vacuna = llenarVacunas();
+				
+				
+				linea1 = "";
+				try {
+					FileReader fr = new FileReader(NomFit);
+					BufferedReader br = new BufferedReader(fr);
+					
+					linea = br.readLine();
+					linea = br.readLine();
+					linea = br.readLine();
+					
+					linea1 = devolverValor(fr, br, linea);	
+					infectadas = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					infectadasRonda = Integer.valueOf(linea1);
+
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					enfActDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					brotDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					porcVac = Integer.valueOf(linea1);
+					
+					br.close();
+					fr.close();
+				} catch (Exception e3) {
+					System.out.println("Error E/S3: " + e3);	
+				}
+				
+				i = 0;
+				while(j != infectadas) {
+					if((int)(Math.random()*20) == 2) {
+						
+						if(ciudades[i].getinfeccion() == 0) {
+							ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+							System.out.println(ciudades[i].getnombre());
+							j++;
+						}
+					}
+					
+					if(i == 47) {
+						i = 0;
+					}else {
+						i++;
+					}
+					
+				}
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				dispose();
+				
+			}
+		});
 		
 		personalizado = new JButton("Personalizado");
 		personalizado.setForeground(new Color(255, 255, 255));
@@ -86,7 +326,115 @@ public class dificultad extends JFrame implements ActionListener {
 		getContentPane().add(personalizado);
 		personalizado.setFont(buttonFont);
         setButtonProperties(personalizado);
-		personalizado.addActionListener(this);
+		personalizado.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String linea = "";
+				String linea1 = "";
+				int infectadas = 0;
+				int infectadasRonda = 0;
+				int enfActDerr = 0;
+				int brotDerr = 0;
+				int porcVac = 0;
+				int i = 0;
+				int j = 0;
+				File NomFit = new File("modo_personalizado.xml");
+				
+				Ciudad[] ciudades = new Ciudad[48];
+				Virus[] viruses = new Virus [4];
+				Vacunas [] vacuna = new Vacunas [4];
+				
+				//LineaTot se usa para guardar todas las líneas modificadas del fichero
+				String lineaTot = "";
+				//usuario se usa para guardar lo que introduce el usuario
+				String usu = "";
+				
+				ciudades = llenarCiudades();
+				viruses = llenarVirus();
+				vacuna = llenarVacunas();
+				Scanner entrada= new Scanner(System.in);
+				
+				linea1 = "";
+				try {
+					FileReader fr = new FileReader(NomFit);
+					BufferedReader br = new BufferedReader(fr);
+										
+					//Obtenemos primero todo el fichero modificado
+					lineaTot = lineaCompleta(entrada, lineaTot, usu, lineaTot, linea1, fr, br);
+										
+					FileWriter fw = new FileWriter(NomFit,false);
+					BufferedWriter bw = new BufferedWriter(fw);
+										
+					//Escribimos el fichero modificado
+					bw.write(lineaTot);							
+					bw.close();
+					fw.close();
+					br.close();
+					fr.close();
+										
+				} catch (Exception e4) {
+					System.out.println("Error E/S4: " + e4);	
+				}
+				
+				
+				linea1 = "";
+				try {
+					FileReader fr = new FileReader(NomFit);
+					BufferedReader br = new BufferedReader(fr);
+					
+					linea = br.readLine();
+					linea = br.readLine();
+					linea = br.readLine();
+					
+					linea1 = devolverValor(fr, br, linea);	
+					infectadas = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					infectadasRonda = Integer.valueOf(linea1);
+
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					enfActDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					brotDerr = Integer.valueOf(linea1);
+					
+					linea  = br.readLine();
+					linea1 = devolverValor(fr, br, linea);
+					porcVac = Integer.valueOf(linea1);
+					
+					br.close();
+					fr.close();
+				} catch (Exception e5) {
+					System.out.println("Error E/S5: " + e5);	
+				}
+				
+				i = 0;
+				while(j != infectadas) {
+					if((int)(Math.random()*20) == 2) {
+						
+						if(ciudades[i].getinfeccion() == 0) {
+							ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
+							System.out.println(ciudades[i].getnombre());
+							j++;
+						}
+					}
+					
+					if(i == 47) {
+						i = 0;
+					}else {
+						i++;
+					}
+					
+				}
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				dispose();
+				
+			}
+		});
 		
 		JLabel Fondo = new JLabel("fondo");
 		Fondo.setIcon(new ImageIcon("fondo_dificultad.jpg"));
@@ -100,357 +448,7 @@ public class dificultad extends JFrame implements ActionListener {
 		
 	}
 	
-	
-	@Override
-	public void actionPerformed(ActionEvent evt) {
-		// TODO Auto-generated method stub
-		
-		if(evt.getSource() == facil) {
-			
-			String linea = "";
-			String linea1 = "";
-			int infectadas = 0;
-			int infectadasRonda = 0;
-			int enfActDerr = 0;
-			int brotDerr = 0;
-			int porcVac = 0;
-			int i = 0;
-			int j = 0;
-			File NomFit = new File("modo_facil.xml");
-			
-			Ciudad[] ciudades = new Ciudad[48];
-			Virus[] viruses = new Virus [4];
-			Vacunas [] vacuna = new Vacunas [4];
-			
-			ciudades = llenarCiudades();
-			viruses = llenarVirus();
-			vacuna = llenarVacunas();
-	
-			try {
-				FileReader fr = new FileReader(NomFit);
-				BufferedReader br = new BufferedReader(fr);
-				
-				linea = br.readLine();
-				linea = br.readLine();
-				linea = br.readLine();
-				
-				linea1 = devolverValor(fr, br, linea);	
-				infectadas = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				infectadasRonda = Integer.valueOf(linea1);
 
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				enfActDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				brotDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				porcVac = Integer.valueOf(linea1);
-				
-				br.close();
-				fr.close();
-			} catch (Exception e) {
-				System.out.println("Error E/S: " + e);	
-			}
-			
-			i = 0;
-			while(j != infectadas) {
-				if((int)(Math.random()*20) == 2) {
-					
-					if(ciudades[i].getinfeccion() == 0) {
-						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
-						//JOptionPane.showMessageDialog(null, ciudades[i].getnombre());
-						j++;
-					}
-				}
-				
-				if(i == 47) {
-					i = 0;
-				}else {
-					i++;
-				}
-				
-			}
-			
-			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
-			dispose();
-			
-		}
-		
-		
-		if(evt.getSource() == normal) {
-			String linea = "";
-			String linea1 = "";
-			int infectadas = 0;
-			int infectadasRonda = 0;
-			int enfActDerr = 0;
-			int brotDerr = 0;
-			int porcVac = 0;
-			int i = 0;
-			int j = 0;
-			File NomFit = new File("modo_normal.xml");
-			
-			Ciudad[] ciudades = new Ciudad[48];
-			Virus[] viruses = new Virus [4];
-			Vacunas [] vacuna = new Vacunas [4];
-			
-			ciudades = llenarCiudades();
-			viruses = llenarVirus();
-			vacuna = llenarVacunas();
-			
-			
-			linea1 = "";
-			try {
-				FileReader fr = new FileReader(NomFit);
-				BufferedReader br = new BufferedReader(fr);
-				
-				linea = br.readLine();
-				linea = br.readLine();
-				linea = br.readLine();
-				
-				linea1 = devolverValor(fr, br, linea);	
-				infectadas = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				infectadasRonda = Integer.valueOf(linea1);
-
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				enfActDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				brotDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				porcVac = Integer.valueOf(linea1);
-				
-				br.close();
-				fr.close();
-			} catch (Exception e) {
-				System.out.println("Error E/S: " + e);	
-			}
-			
-			i = 0;
-			while(j != infectadas) {
-				if((int)(Math.random()*20) == 2) {
-					
-					if(ciudades[i].getinfeccion() == 0) {
-						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
-						j++;
-					}
-				}
-				
-				if(i == 47) {
-					i = 0;
-				}else {
-					i++;
-				}
-				
-			}
-			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
-			dispose();
-			
-		}
-		
-		if(evt.getSource() == dificil) {
-			String linea = "";
-			String linea1 = "";
-			int infectadas = 0;
-			int infectadasRonda = 0;
-			int enfActDerr = 0;
-			int brotDerr = 0;
-			int porcVac = 0;
-			int i = 0;
-			int j = 0;
-
-			File NomFit = new File("modo_dificil.xml");
-			
-			Ciudad[] ciudades = new Ciudad[48];
-			Virus[] viruses = new Virus [4];
-			Vacunas [] vacuna = new Vacunas [4];
-			
-			ciudades = llenarCiudades();
-			viruses = llenarVirus();
-			vacuna = llenarVacunas();
-			
-			
-			linea1 = "";
-			try {
-				FileReader fr = new FileReader(NomFit);
-				BufferedReader br = new BufferedReader(fr);
-				
-				linea = br.readLine();
-				linea = br.readLine();
-				linea = br.readLine();
-				
-				linea1 = devolverValor(fr, br, linea);	
-				infectadas = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				infectadasRonda = Integer.valueOf(linea1);
-
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				enfActDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				brotDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				porcVac = Integer.valueOf(linea1);
-				
-				br.close();
-				fr.close();
-			} catch (Exception e) {
-				System.out.println("Error E/S: " + e);	
-			}
-			
-			i = 0;
-			while(j != infectadas) {
-				if((int)(Math.random()*20) == 2) {
-					
-					if(ciudades[i].getinfeccion() == 0) {
-						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
-						System.out.println(ciudades[i].getnombre());
-						j++;
-					}
-				}
-				
-				if(i == 47) {
-					i = 0;
-				}else {
-					i++;
-				}
-				
-			}
-			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
-			dispose();
-			
-		}
-		
-		if(evt.getSource() == personalizado) {
-			String linea = "";
-			String linea1 = "";
-			int infectadas = 0;
-			int infectadasRonda = 0;
-			int enfActDerr = 0;
-			int brotDerr = 0;
-			int porcVac = 0;
-			int i = 0;
-			int j = 0;
-			File NomFit = new File("modo_personalizado.xml");
-			
-			Ciudad[] ciudades = new Ciudad[48];
-			Virus[] viruses = new Virus [4];
-			Vacunas [] vacuna = new Vacunas [4];
-			
-			//LineaTot se usa para guardar todas las líneas modificadas del fichero
-			String lineaTot = "";
-			//usuario se usa para guardar lo que introduce el usuario
-			String usuario = "";
-			
-			ciudades = llenarCiudades();
-			viruses = llenarVirus();
-			vacuna = llenarVacunas();
-			Scanner entrada= new Scanner(System.in);
-			
-			linea1 = "";
-			try {
-				FileReader fr = new FileReader(NomFit);
-				BufferedReader br = new BufferedReader(fr);
-									
-				//Obtenemos primero todo el fichero modificado
-				lineaTot = lineaCompleta(entrada, lineaTot, usuario, lineaTot, linea1, fr, br);
-									
-				FileWriter fw = new FileWriter(NomFit,false);
-				BufferedWriter bw = new BufferedWriter(fw);
-									
-				//Escribimos el fichero modificado
-				bw.write(lineaTot);							
-				bw.close();
-				fw.close();
-				br.close();
-				fr.close();
-									
-			} catch (Exception e) {
-				System.out.println("Error E/S: " + e);	
-			}
-			
-			
-			linea1 = "";
-			try {
-				FileReader fr = new FileReader(NomFit);
-				BufferedReader br = new BufferedReader(fr);
-				
-				linea = br.readLine();
-				linea = br.readLine();
-				linea = br.readLine();
-				
-				linea1 = devolverValor(fr, br, linea);	
-				infectadas = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				infectadasRonda = Integer.valueOf(linea1);
-
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				enfActDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				brotDerr = Integer.valueOf(linea1);
-				
-				linea  = br.readLine();
-				linea1 = devolverValor(fr, br, linea);
-				porcVac = Integer.valueOf(linea1);
-				
-				br.close();
-				fr.close();
-			} catch (Exception e) {
-				System.out.println("Error E/S: " + e);	
-			}
-			
-			i = 0;
-			while(j != infectadas) {
-				if((int)(Math.random()*20) == 2) {
-					
-					if(ciudades[i].getinfeccion() == 0) {
-						ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
-						System.out.println(ciudades[i].getnombre());
-						j++;
-					}
-				}
-				
-				if(i == 47) {
-					i = 0;
-				}else {
-					i++;
-				}
-				
-			}
-			Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac);
-			dispose();
-
-		}
-		
-	}
-	
-	
-	
-	
 		public static Ciudad[] llenarCiudades() {
 			Ciudad[] ciudades = new Ciudad[48];
 			File ciu = new File("ciudades.txt");
@@ -530,7 +528,7 @@ public class dificultad extends JFrame implements ActionListener {
 			    br.close();
 			    fr.close();
 			} catch (Exception e) {
-					// TODO: handle exception
+					//System.out.println("ERROR E/SFF: " + e);
 			}
 					
 			return ciudades;
@@ -776,7 +774,7 @@ public class dificultad extends JFrame implements ActionListener {
 				linea = br.readLine();
 				lineaTot = lineaTot + linea + "\n";
 			} catch (Exception e) {
-				System.out.println("Error E/S: " + e);
+				System.out.println("Error E/S54: " + e);
 			}
 			
 			return lineaTot;

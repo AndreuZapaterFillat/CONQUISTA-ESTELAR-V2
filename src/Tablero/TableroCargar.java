@@ -19,8 +19,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Tablero extends JFrame {
-	
+public class TableroCargar extends JFrame {
+		
 	int perder = 0;
 	int enfAct = 0;
 	int numBrot = 0;
@@ -31,11 +31,10 @@ public class Tablero extends JFrame {
     ArrayList<String> azul = new ArrayList<>();
     ArrayList<String> verde = new ArrayList<>();
     ArrayList<String> amarillo = new ArrayList<>();
-
 	
-	JLabel Rondas = new JLabel("ronda 1");
-	JLabel Acciones = new JLabel("acciones: 4");
-    JProgressBar progressBar_Vader = new JProgressBar();
+	JLabel Rondas = new JLabel("ronda " + ronda);
+	JLabel Acciones = new JLabel("acciones: " + acciones);
+    JProgressBar progressBar_Vader = new JProgressBar();  
     JProgressBar progressBar_Grievous = new JProgressBar();
     JProgressBar progressBar_Maul = new JProgressBar();
     JProgressBar progressBar_Sidious = new JProgressBar();
@@ -44,9 +43,43 @@ public class Tablero extends JFrame {
     JLabel Conquistas;
     JLabel Brotes;
     
-	public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac, String usuario, String contra) {
-	
-
+	public TableroCargar(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac, String usuario, String contra) {
+		
+		progressBar_Vader.setValue((int)vacuna[3].getporcentaje());
+		progressBar_Grievous.setValue((int)vacuna[2].getporcentaje());
+		progressBar_Maul.setValue((int)vacuna[1].getporcentaje());
+		progressBar_Sidious.setValue((int)vacuna[0].getporcentaje());
+		
+		Connection con = bbdd.conectarBaseDatos();
+		String[] listaElementosSeleccionados = new String[5];
+		String[] Select = new String[20];
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "NUMBROT";
+		Select = bbdd.select(con, "SELECT NUMBROT FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+		numBrot = Integer.valueOf(Select[0]);
+		System.out.println(numBrot);
+		Brotes = new JLabel("brotes: " + numBrot +"/"+brotDerr);
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "NUMINF";
+		Select = bbdd.select(con, "SELECT NUMINF FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+		enfAct = Integer.valueOf(Select[0]);
+		System.out.println(enfAct);
+		Conquistas = new JLabel("conquistas: " + enfAct +"/"+enfActDerr);
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "ACCIONES";
+		Select = bbdd.select(con, "SELECT ACCIONES FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+		acciones = Integer.valueOf(Select[0]);
+		Acciones.setText("acciones: " + acciones);
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "RONDA";
+		Select = bbdd.select(con, "SELECT RONDA FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+		ronda = Integer.valueOf(Select[0]);
+		Rondas.setText("ronda "+ ronda);
+		
+		
     	Font customFont = loadFont("Starjedi.ttf");
     	Font buttonFont = customFont.deriveFont(Font.PLAIN, 14);
 		
@@ -94,11 +127,11 @@ public class Tablero extends JFrame {
 				if(Select[0].charAt(0) != '0') {
 					bbdd.update(con, "UPDATE PANDEMIC_PARTIDA "
 							+ "SET NUMBROT = "+numBrot+", NUMINF = "+enfAct+", NUMINFPERD = "+enfActDerr+", NUMBROTPERD = "+brotDerr+", NUMINFROND = "+infectadasRonda+", ACCIONES = "+acciones+", VACROJ = "+vacuna[3].getporcentaje()+","
-									+ " VACVERD = "+vacuna[2].getporcentaje()+", VACAMA = "+vacuna[1].getporcentaje()+", VACAZUL = "+vacuna[0].getporcentaje()+", PORCVAC = "+porcVac+", RONDA = "+ronda+" "
+									+ " VACVERD = "+vacuna[2].getporcentaje()+", VACAMA = "+vacuna[1].getporcentaje()+", VACAZUL = "+vacuna[0].getporcentaje()+", PORCVAC = "+porcVac+" "
 							+ "WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+contra+"'");
 				}else {
-					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, NUMBROT, NUMINF, NUMINFPERD, NUMBROTPERD, NUMINFROND, ACCIONES, VACROJ, VACVERD, VACAMA, VACAZUL, PORCVAC, RONDA)"
-							+ "VALUES ('"+usuario+"','"+contra+"',"+numBrot+","+enfAct+","+enfActDerr+","+brotDerr+","+infectadasRonda+","+acciones+","+vacuna[3].getporcentaje()+","+vacuna[2].getporcentaje()+","+vacuna[1].getporcentaje()+","+vacuna[0].getporcentaje()+","+porcVac+","+ronda+")");
+					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, NUMBROT, NUMINF, NUMINFPERD, NUMBROTPERD, NUMINFROND, ACCIONES, VACROJ, VACVERD, VACAMA, VACAZUL, PORCVAC)"
+							+ "VALUES ('"+usuario+"','"+contra+"',"+numBrot+","+enfAct+","+enfActDerr+","+brotDerr+","+infectadasRonda+","+acciones+","+vacuna[3].getporcentaje()+","+vacuna[2].getporcentaje()+","+vacuna[1].getporcentaje()+","+vacuna[0].getporcentaje()+","+porcVac+")");
 				}
 				
 				
@@ -1172,7 +1205,6 @@ public class Tablero extends JFrame {
 				if(ciudades[i].getinfeccion() >= 0 && ciudades[i].getinfeccion() < 3 ) {
 					ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
 					
-					//Añadir ciudades por color
 					if(ciudades[i].getenfermedad().toLowerCase().equals("darth vader")) {
 						rojo.add(ciudades[i].getnombre().toLowerCase());
 					}
@@ -1217,9 +1249,10 @@ public class Tablero extends JFrame {
 		
 		for(int i = 0; i < 48; i++) {
 			if(ciudades[i].getinfeccion() != 0) {
-				enfAct++;
+				enfAct = enfAct + ciudades[i].getinfeccion();
 			}
 		}
+		System.out.println(enfAct);
 	}
 	
 	private void brotarCiudades(Ciudad[] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra) {
@@ -1240,8 +1273,7 @@ public class Tablero extends JFrame {
 	                    if (ciudades[i].getinfeccion() < 3) {
 	                        ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
 	                        
-	                        //Añadir ciudades por color
-	    					if(ciudades[i].getenfermedad().toLowerCase().equals("darth vader")) {
+	                        if(ciudades[i].getenfermedad().toLowerCase().equals("darth vader")) {
 	    						rojo.add(ciudades[i].getnombre().toLowerCase());
 	    					}
 	    					else if(ciudades[i].getenfermedad().toLowerCase().equals("darth sidious")) {
@@ -1331,7 +1363,6 @@ public class Tablero extends JFrame {
         				if(ciudades[i].getinfeccion() >= 0 && ciudades[i].getinfeccion() < 3 ) {
         					ciudades[i].setinfeccion(ciudades[i].getinfeccion() + 1);
         					
-        					//Añadir ciudades por color
         					if(ciudades[i].getenfermedad().toLowerCase().equals("darth vader")) {
         						rojo.add(ciudades[i].getnombre().toLowerCase());
         					}

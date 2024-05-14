@@ -1,14 +1,22 @@
 package Menu;
 
 import javax.swing.*;
+
+import Partida.Ciudad;
+import Partida.Vacunas;
+import Partida.Virus;
+import Tablero.TableroCargar;
+
 import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.sql.Connection;
+import java.util.ArrayList;
 
 public class menu extends JFrame{
 	
-    public menu() {
+    public menu(String usuario, String contra) {
         getContentPane().setBackground(new Color(240, 240, 240));
         getContentPane().setLayout(null);
         
@@ -30,7 +38,7 @@ public class menu extends JFrame{
         getContentPane().add(NuevaPartida);
         NuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dificultad dif = new dificultad();
+				dificultad dif = new dificultad(usuario, contra);
 				dispose();
 			}
 		});
@@ -117,6 +125,80 @@ public class menu extends JFrame{
         setButtonProperties(CargarPartida); // Establecer propiedades del botón
         CargarPartida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	Connection con = bbdd.conectarBaseDatos();
+    			String[] listaElementosSeleccionados = new String[5];
+    			String[] Select = new String[20];
+    			listaElementosSeleccionados = new String[1];
+				listaElementosSeleccionados[0] = "COUNT(*)";
+				Select = bbdd.select(con, "SELECT COUNT(*) FROM PANDEMIC_PARTIDA WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+ contra +"'", listaElementosSeleccionados);	
+    			
+    			if(Select[0].charAt(0) != '0') {
+    				Ciudad[] ciudades = new Ciudad[48];
+    				Virus[] viruses = new Virus [4];
+    				Vacunas [] vacuna = new Vacunas [4];
+    				
+    				ciudades = llenarCiudades();
+    				viruses = llenarVirus();
+    				vacuna = llenarVacunas();
+    				int infectadasRonda = 0; 
+    				int enfActDerr = 0; 
+    				int brotDerr = 0; 
+    				int porcVac = 0;
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "NUMINFROND";
+    				Select = bbdd.select(con, "SELECT NUMINFROND FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				infectadasRonda = Integer.valueOf(Select[0]);
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "NUMINFPERD";
+    				Select = bbdd.select(con, "SELECT NUMINFPERD FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				enfActDerr = Integer.valueOf(Select[0]);
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "NUMBROTPERD";
+    				Select = bbdd.select(con, "SELECT NUMBROTPERD FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				brotDerr = Integer.valueOf(Select[0]);
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "PORCVAC";
+    				Select = bbdd.select(con, "SELECT PORCVAC FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				porcVac = Integer.valueOf(Select[0]);
+    				
+    				
+    				for(int i = 0; i < 48; i++) {
+    					listaElementosSeleccionados = new String[1];
+        				listaElementosSeleccionados[0] = "INFECCION";
+        				Select = bbdd.select(con, "SELECT c.INFECCION FROM PANDEMIC_CIUDADES p, TABLE(p.CIUDADES) c WHERE p.USUARIO = '" + usuario + "' AND p.CONTRA = '" + contra +"' AND c.NOMBRE = '"+ciudades[i].getnombre()+"'", listaElementosSeleccionados);
+        				ciudades[i].setinfeccion(Integer.valueOf(Select[0]));
+    				}
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "VACROJ";
+    				Select = bbdd.select(con, "SELECT VACROJ FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				vacuna[3].setporcentaje(Integer.valueOf(Select[0]));
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "VACVERD";
+    				Select = bbdd.select(con, "SELECT VACVERD FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				vacuna[2].setporcentaje(Integer.valueOf(Select[0]));
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "VACAMA";
+    				Select = bbdd.select(con, "SELECT VACAMA FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				vacuna[1].setporcentaje(Integer.valueOf(Select[0]));
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "VACAZUL";
+    				Select = bbdd.select(con, "SELECT VACAZUL FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				vacuna[0].setporcentaje(Integer.valueOf(Select[0]));
+    					
+					JOptionPane.showMessageDialog(null, "Partida encontrada. Cargando");
+					TableroCargar tabc = new TableroCargar(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "El usuario no tiene una partida guardada");
+				}
             }
         });
         CargarPartida.setBounds(480, 324, 350, 40);
@@ -217,6 +299,171 @@ public class menu extends JFrame{
          
         instruccionesFrame.setVisible(true);
     }
+    
+
+	public static Ciudad[] llenarCiudades() {
+		Ciudad[] ciudades = new Ciudad[48];
+		File ciu = new File("ciudades.txt");
+		String texto = "";
+		String ciudad = "";
+		ArrayList<String> imperio = new ArrayList<String>();
+		String [] colindantes;
+		int i = 0;
+		int j = 0;
+		int z = 0;
+		int comas = 0;
+		int [] val = new int[1];
+		int [] coord = new int[2];
+		imperio.add("Darth Sidious");
+		imperio.add("Darth Maul");
+		imperio.add("General Grievous");
+		imperio.add("Darth Vader");
+		
+		
+	
+		try {
+			FileReader fr = new FileReader(ciu);
+		    BufferedReader br = new BufferedReader(fr); 
+		     while(texto != null) {
+		    	coord = new int [2];
+		    	ciudades[i] = new Ciudad();
+		    	ciudades[i].coordenadas = new int[2];
+				texto = br.readLine();
+				val[0] = 0;
+				if(texto != null) {
+					ciudad = devolverCiudad(texto, val);
+					ciudades[i].setnombre(ciudad);
+					
+                    //Número 1
+					val[0] = val[0] + 2;
+                    //Número 2
+                    coord[0] = Integer.valueOf(devolverCoordenada(texto, val));
+                    //Número 3
+                    coord[1] = Integer.valueOf(devolverCoordenada(texto, val));                    
+                    
+					ciudades[i].setcoordenadas(coord);
+					ciudades[i].setcolor(imperio.get(j));
+					ciudades[i].setinfeccion(0);
+					
+					comas = 0;
+					for(z = 0; z != texto.length(); z++) {
+						if(texto.charAt(z) == ',')
+							comas++;
+					}
+
+					colindantes = new String [comas + 1];
+					
+					comas = 0;
+
+					while(val[0] != texto.length()) {
+						ciudad = "";
+						for(z = val[0]; texto.charAt(z) != ',' && texto.charAt(z) != ';'; z++) {
+							ciudad = ciudad +  texto.charAt(z);
+						}
+						val[0] = z + 1;
+						colindantes[comas] = ciudad;
+						comas++;
+					}
+					ciudades[i].setciudadesColindantes(colindantes);
+					
+				}
+				
+				//Cambiamos la palabra del arrayList cada 12 ciudades
+				if(((i+1)%12) == 0 && i != 0) {
+					j++;
+				}
+			    
+			    if(i != 48) {
+					i++;
+				}
+	        }
+		    br.close();
+		    fr.close();
+		} catch (Exception e) {
+				//System.out.println("ERROR E/SFF: " + e);
+		}
+				
+		return ciudades;
+	}
+	
+	
+	public static Virus[] llenarVirus() {
+		Virus[] viruses = new Virus [4];
+		int i = 0;
+		String id = "";
+		String[] colores = new String [] {"azul", "amarillo", "verde", "rojo"};
+		String[] imperio = new String [] {"Darth Sidious", "Darth Maul", "General Grievous",  "Darth Vader" };
+
+	
+		for(i = 0; i < 4; i++) {
+			id = "";
+			viruses[i] = new Virus();
+			viruses[i].setcolor(colores[i]);
+			viruses[i].setnombre(imperio[i]);
+			id = id + i;
+			viruses[i].setidentificador(id);	
+		}
+		
+		return viruses;
+	}
+
+	
+	public static Vacunas[] llenarVacunas() {
+	Vacunas [] vacuna = new Vacunas [4];
+	int i = 0;
+	String[] colores = new String [] {"azul", "amarillo", "verde", "rojo"};
+	String[] imperio = new String [] {"Darth Sidious", "Darth Maul", "General Grievous",  "Darth Vader" };
+		
+	for(i = 0; i < 4; i++) {
+		vacuna[i] = new Vacunas();
+		vacuna[i].setcolor(colores[i]);
+		vacuna[i].setporcentaje(0);
+		vacuna[i].setnombre(imperio[i]);
+	}
+		
+	return vacuna;	
+}
+	
+
+	//************************************************************************************
+	//** Nombre de la función: devolverCiudad
+	//** Explicación del que hace la función: Devuelve el nombre de la ciudad
+	//** Parámetros de entrada: String total, int [] val
+	//** Parámetros de salida: String nombreCiudad
+	//************************************************************************************	
+	public static String devolverCiudad(String total, int [] val) {
+		String nombreCiudad = "";
+		int i = 0;
+		
+		for(i = 0; total.charAt(i) != ';' && total.charAt(i) != ','; i++) {
+			nombreCiudad = nombreCiudad + total.charAt(i);
+		}
+		val[0] = i + 1;
+		
+		
+		
+		return nombreCiudad;
+	}
+	
+	//************************************************************************************
+	//** Nombre de la función: devolverCoordenada
+	//** Explicación del que hace la función: Devuelve la coordenada
+	//** Parámetros de entrada: String total, int [] val
+	//** Parámetros de salida: String coord
+	//************************************************************************************	
+	public static String devolverCoordenada(String total, int [] val) {
+		int i = 0;
+		String coord = "";
+		
+		for(i = val[0] ; total.charAt(i) != ';'; i++) {
+			coord = coord + total.charAt(i);
+		}
+
+		val[0]  = i + 1;
+		return coord;
+		
+		
+	}
     
 
 }
