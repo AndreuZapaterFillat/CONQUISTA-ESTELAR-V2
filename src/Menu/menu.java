@@ -16,7 +16,10 @@ import java.util.ArrayList;
 
 public class menu extends JFrame{
 	
+	private Clip clip;
+	
     public menu(String usuario, String contra) {
+
         getContentPane().setBackground(new Color(240, 240, 240));
         getContentPane().setLayout(null);
         
@@ -39,6 +42,7 @@ public class menu extends JFrame{
         NuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dificultad dif = new dificultad(usuario, contra);
+				detenerMusica();
 				dispose();
 			}
 		});
@@ -195,6 +199,7 @@ public class menu extends JFrame{
     					
 					JOptionPane.showMessageDialog(null, "Partida encontrada. Cargando");
 					TableroCargar tabc = new TableroCargar(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+					detenerMusica();
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "El usuario no tiene una partida guardada");
@@ -242,17 +247,24 @@ public class menu extends JFrame{
         button.setBorderPainted(false); // Quita el borde del botón
     }
     
-    // Método para reproducir música de fondo
+ // Método para reproducir música de fondo
     private void reproducirMusica(String filePath) {
         try {
             File file = new File(filePath);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
+        }
+    }
+
+ // Método para detener la música
+    private void detenerMusica() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
         }
     }
     
