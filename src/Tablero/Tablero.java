@@ -1076,7 +1076,7 @@ public class Tablero extends JFrame {
      * @return Font Contiene la fuente
      */
 	
-	private Font loadFont(String path) {
+	public Font loadFont(String path) {
 	    try {
 	        return Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(Font.PLAIN, 12);
 	    } catch (IOException | FontFormatException e) {
@@ -1089,10 +1089,10 @@ public class Tablero extends JFrame {
     /**
      * Pone estilos a los botones.
      *
-     * @param JButton Contiene el boton.
+     * @param button Contiene el boton.
      */
 	
-	private void setButtonProperties(JButton button) {
+	public void setButtonProperties(JButton button) {
 		button.setOpaque(false); // Hace que el botón sea transparente
     	button.setContentAreaFilled(false); // Hace que el área de contenido del botón sea transparente
     	button.setBorderPainted(false); // Quita el borde del botón
@@ -1102,20 +1102,20 @@ public class Tablero extends JFrame {
     /**
      * Se muestra la ventana de cada ciudad para poder reducir el nivel de infeccion y contiene la funcionalidad para reducir el nivel de infeccion .
      *
-     * @param Ciudad Contiene la ciudad actual.
-     * @param Ciudad[] Contiene todas las ciudades.
-     * @param int Contiene la cantidad de ciudades infectadas por ronda.
-     * @param JButton Contiene el boton actual.
-     * @param Vacunas[] Contiene todas las vacunas.
-     * @param int Contiene la cantidad de infecciones activas para perder.
-     * @param int Contiene la cantidad de brotes para perder.
-     * @param String Contiene el nombre de usuario.
-     * @param String Contiene la contraseña del usuario.
-     * @param int Contiene el porcentaje que se suma al investigar la vacuna.
-     * @param String Contine el modo de juego.
+     * @param ciudad Contiene la ciudad actual.
+     * @param ciudades Contiene todas las ciudades.
+     * @param infectadasRonda Contiene la cantidad de ciudades infectadas por ronda.
+     * @param boton Contiene el boton actual.
+     * @param vacuna Contiene todas las vacunas.
+     * @param enfActDerr Contiene la cantidad de infecciones activas para perder.
+     * @param brotDerr Contiene la cantidad de brotes para perder.
+     * @param usuario Contiene el nombre de usuario.
+     * @param contra Contiene la contraseña del usuario.
+     * @param porcVac Contiene el porcentaje que se suma al investigar la vacuna.
+     * @param modo Contine el modo de juego.
      */
 	
-	private void mostrarVentana(Ciudad ciudad, Ciudad [] ciudades, int infectadasRonda, JButton boton, Vacunas [] vacuna, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
+	public void mostrarVentana(Ciudad ciudad, Ciudad [] ciudades, int infectadasRonda, JButton boton, Vacunas [] vacuna, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
 	    
 		JFrame ventana = new JFrame();
 	    JLabel etiquetaCiudad = new JLabel("planeta : " + ciudad.getnombre().toLowerCase());
@@ -1205,20 +1205,19 @@ public class Tablero extends JFrame {
 	
     /**
      * Se infectan las ciudades .
-     *
-     * @param Ciudad Contiene la ciudad actual.
-     * @param Ciudad[] Contiene todas las ciudades.
-     * @param int Contiene la cantidad de ciudades infectadas por ronda.
-     * @param int Contiene la cantidad de infecciones activas para perder.
-     * @param int Contiene la cantidad de brotes para perder.
-     * @param String Contiene el nombre de usuario.
-     * @param String Contiene la contraseña del usuario.
-     * @param int Contiene el porcentaje que se suma al investigar la vacuna.
-     * @param String Contine el modo de juego.
+     * @param ciudades Contiene todas las ciudades.
+     * @param ciudad Contiene la ciudad actual.
+     * @param infectadasRonda Contiene la cantidad de ciudades infectadas por ronda.
+     * @param enfActDerr Contiene la cantidad de infecciones activas para perder.
+     * @param brotDerr Contiene la cantidad de brotes para perder.
+     * @param usuario Contiene el nombre de usuario.
+     * @param contra Contiene la contraseña del usuario.
+     * @param porcVac Contiene el porcentaje que se suma al investigar la vacuna.
+     * @param modo Contine el modo de juego.
      */
 	
 	
-	private void infectarCiudades(Ciudad [] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
+	public void infectarCiudades(Ciudad [] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
 		int i = 0;
 		int j = 0;
 		
@@ -1286,10 +1285,10 @@ public class Tablero extends JFrame {
     /**
      * Mira las ciudades que estan infectadas.
      *
-     * @param Ciudad[] Contiene todas las cidades.
+     * @param ciudades Contiene todas las cidades.
      */
 	
-	private void mirarInfectadas(Ciudad[] ciudades) {
+	public void mirarInfectadas(Ciudad[] ciudades) {
 		enfAct = 0;
 		
 		for(int i = 0; i < 48; i++) {
@@ -1302,18 +1301,18 @@ public class Tablero extends JFrame {
     /**
      * Se produce el brote de las ciudades .
      *
-     * @param Ciudad Contiene la ciudad actual.
-     * @param Ciudad[] Contiene todas las ciudades.
-     * @param int Contiene la cantidad de ciudades infectadas por ronda.
-     * @param int Contiene la cantidad de infecciones activas para perder.
-     * @param int Contiene la cantidad de brotes para perder.
-     * @param String Contiene el nombre de usuario.
-     * @param String Contiene la contraseña del usuario.
-     * @param int Contiene el porcentaje que se suma al investigar la vacuna.
-     * @param String Contine el modo de juego.
+     * @param ciudades Contiene todas las ciudades.
+     * @param ciudad Contiene la ciudad actual.
+     * @param infectadasRonda Contiene la cantidad de ciudades infectadas por ronda.
+     * @param enfActDerr Contiene la cantidad de infecciones activas para perder.
+     * @param brotDerr Contiene la cantidad de brotes para perder.
+     * @param usuario Contiene el nombre de usuario.
+     * @param contra Contiene la contraseña del usuario.
+     * @param porcVac Contiene el porcentaje que se suma al investigar la vacuna.
+     * @param modo Contine el modo de juego.
      */
 	
-	private void brotarCiudades(Ciudad[] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
+	public void brotarCiudades(Ciudad[] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
 		numBrot++;
 	    Brotes.setText("brotes: " + numBrot + "/" + brotDerr);
 	    
@@ -1406,7 +1405,7 @@ public class Tablero extends JFrame {
      *
      */
 	
-	private void modifcarAcciones() {
+	public void modifcarAcciones() {
 		Acciones.setText("acciones: " + acciones);
 	}
 	
@@ -1415,7 +1414,7 @@ public class Tablero extends JFrame {
      *
      */
 	
-	private void pasarRonda() {
+	public void pasarRonda() {
 		Rondas.setText("Ronda " + ronda);
 		JOptionPane.showMessageDialog(null, "Ronda " + ronda);
 	}
@@ -1423,21 +1422,21 @@ public class Tablero extends JFrame {
     /**
      * Funcionalidad de investigar las vacunas .
      *
-     * @param Vacuna Contiene la vacuna actual.
-     * @param JProgressBar Contiene la barra de progreso de la vacuna actual.
-     * @param Ciudad[] Contiene todas las ciudades.
-     * @param int Contiene la cantidad de ciudades infectadas por ronda.
-     * @param JButton[] Contiene todos los botones de los planetas / ciudades.
-     * @param Vacunas[] Contiene todas las vacunas.
-     * @param int Contiene la cantidad de infecciones activas para perder.
-     * @param int Contiene la cantidad de brotes para perder.
-     * @param String Contiene el nombre de usuario.
-     * @param String Contiene la contraseña del usuario.
+     * @param vacuna Contiene la vacuna actual.
+     * @param prog Contiene la barra de progreso de la vacuna actual.
      * @param int Contiene el porcentaje que se suma al investigar la vacuna.
-     * @param String Contine el modo de juego.
+     * @param Ciudades Contiene todas las ciudades.
+     * @param infectadasRonda Contiene la cantidad de ciudades infectadas por ronda.
+     * @param planetas Contiene todos los botones de los planetas / ciudades.
+     * @param vacunas Contiene todas las vacunas.
+     * @param enfActDerr Contiene la cantidad de infecciones activas para perder.
+     * @param brotDerr Contiene la cantidad de brotes para perder.
+     * @param usuario Contiene el nombre de usuario.
+     * @param contra Contiene la contraseña del usuario.
+     * @param modo Contine el modo de juego.
      */
 	
-	private void investigarVacuna(Vacunas vacuna, JProgressBar prog, int porcVac, Ciudad[] ciudades, int infectadasRonda, JButton [] planetas, Vacunas[] vacunas, int enfActDerr, int brotDerr, String usuario, String contra, String modo) {
+	public void investigarVacuna(Vacunas vacuna, JProgressBar prog, int porcVac, Ciudad[] ciudades, int infectadasRonda, JButton [] planetas, Vacunas[] vacunas, int enfActDerr, int brotDerr, String usuario, String contra, String modo) {
 		if(vacuna.getporcentaje() >= 100) {
 			JOptionPane.showMessageDialog(null, "Ya está investigado");
 		}else if(acciones !=4){
@@ -1545,11 +1544,11 @@ public class Tablero extends JFrame {
     /**
      * Comprueba si hay victoria.
      *
-     * @param Vacuna[] Contiene todas las vacunas.
-     * @param JFrame Contiene la ventana actual.
+     * @param vacuna Contiene todas las vacunas.
+     * @param ventanaSecundaria Contiene la ventana actual.
      */
 	
-	private void mirarVictoria(Vacunas[] vacuna, JFrame ventanaSecundaria) {
+	public void mirarVictoria(Vacunas[] vacuna, JFrame ventanaSecundaria) {
 		//System.out.println(vacuna[0].getporcentaje() + " " + vacuna[1].getporcentaje() + " " + vacuna[2].getporcentaje() + " " + vacuna[3].getporcentaje() + " ");
 		if(vacuna[0].getporcentaje() >= 100 && vacuna[1].getporcentaje() >= 100 && vacuna[2].getporcentaje() >= 100 && vacuna[3].getporcentaje() >= 100) {
         	ventanaSecundaria.dispose();
@@ -1559,16 +1558,16 @@ public class Tablero extends JFrame {
     /**
      * Calcula la puntuacion final de la partida.
      *
-     * @param int Contiene la cantidad de las ciudades infectadas de inicio.
-     * @param int Contiene la cantidad de las ciudades infectadas por ronda.
-     * @param int Contiene la cantidad de las enfermedades activas para perder.
-     * @param int Contiene la cantidad de los brotes activos para perder.
-     * @param int Contiene la cantidad del porcentaje de desarrollo de las vacunas.
-     * @param int Contiene la cantidad de rondas jugadas en la partida.
-     * @param String Contiene el nombre de usuario.
-     * @param String Contiene la contraseña del usuario.
+     * @param ciudadesInfectadasInicio Contiene la cantidad de las ciudades infectadas de inicio.
+     * @param ciudadesInfectadasRonda Contiene la cantidad de las ciudades infectadas por ronda.
+     * @param enfermedadesActivasPerder Contiene la cantidad de las enfermedades activas para perder.
+     * @param brotesActivosPerder Contiene la cantidad de los brotes activos para perder.
+     * @param porcentajeDesarrolloVacuna Contiene la cantidad del porcentaje de desarrollo de las vacunas.
+     * @param rondas Contiene la cantidad de rondas jugadas en la partida.
+     * @param usuario Contiene el nombre de usuario.
+     * @param modo Contiene la contraseña del usuario.
      * 
-     * @return double Contiene la puntuacion final
+     * @return puntuacionFinal Contiene la puntuacion final
      */
 	
 	public static double calcularPuntuacion(int ciudadesInfectadasInicio, int ciudadesInfectadasRonda, int enfermedadesActivasPerder, int brotesActivosPerder, int porcentajeDesarrolloVacuna, int rondas, String usuario, String modo) {
