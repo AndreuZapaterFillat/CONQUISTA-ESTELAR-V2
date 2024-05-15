@@ -21,6 +21,11 @@ import java.util.Iterator;
 
 public class Tablero extends JFrame {
 	
+    /**
+     * Se Usan estas variables globales para facilitar el acceso a ellas desde cualquier parte del codigo.
+     * 
+     */
+	
 	int perder = 0;
 	int enfAct = 0;
 	int numBrot = 0;
@@ -43,6 +48,11 @@ public class Tablero extends JFrame {
     JFrame ventanaSecundaria;
     JLabel Conquistas;
     JLabel Brotes;
+    
+    /**
+     * Se Crea la clase Tablero que contiene el tablero de juego el qual tiene principalmente JButton, JProgressBar y JLabel.
+     * 
+     */
     
 	public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac, String usuario, String contra, String modo) {
 	
