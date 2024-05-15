@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -119,6 +120,26 @@ public class dificultad extends JFrame{
 					System.out.println("Error E/S1: " + e1);	
 				}
 				
+				Connection con = bbdd.conectarBaseDatos();
+				//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+				String[] listaElementosSeleccionados = new String[5];
+				String[] Select = new String[20];
+				
+				listaElementosSeleccionados = new String[1];
+				listaElementosSeleccionados[0] = "COUNT(*)";
+				Select = bbdd.select(con, "SELECT COUNT(*) FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+
+				if(Select[0].charAt(0) != '0') {
+					bbdd.update(con, "UPDATE PANDEMIC_PARTIDA "
+							+ "SET INFECCION = "+infectadas+" "
+							+ "WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+contra+"'");
+				}else {
+					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, INFECCION)"
+							+ "VALUES ('"+usuario+"','"+contra+"',"+infectadas+")");
+				}
+				
+				
+				
 				i = 0;
 				while(j != infectadas) {
 					if((int)(Math.random()*20) == 2) {
@@ -138,7 +159,9 @@ public class dificultad extends JFrame{
 					
 				}
 				
-				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				String modo = "F";
+				
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra, modo);
 				dispose();
 				
 			}
@@ -208,6 +231,24 @@ public class dificultad extends JFrame{
 					System.out.println("Error E/S2: " + e2);	
 				}
 				
+				Connection con = bbdd.conectarBaseDatos();
+				//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+				String[] listaElementosSeleccionados = new String[5];
+				String[] Select = new String[20];
+				
+				listaElementosSeleccionados = new String[1];
+				listaElementosSeleccionados[0] = "COUNT(*)";
+				Select = bbdd.select(con, "SELECT COUNT(*) FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+
+				if(Select[0].charAt(0) != '0') {
+					bbdd.update(con, "UPDATE PANDEMIC_PARTIDA "
+							+ "SET INFECCION = "+infectadas+" "
+							+ "WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+contra+"'");
+				}else {
+					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, INFECCION)"
+							+ "VALUES ('"+usuario+"','"+contra+"',"+infectadas+")");
+				}
+				
 				i = 0;
 				while(j != infectadas) {
 					if((int)(Math.random()*20) == 2) {
@@ -225,7 +266,9 @@ public class dificultad extends JFrame{
 					}
 					
 				}
-				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				String modo = "N";
+				
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra, modo);
 				dispose();
 				
 			}
@@ -296,6 +339,24 @@ public class dificultad extends JFrame{
 					System.out.println("Error E/S3: " + e3);	
 				}
 				
+				Connection con = bbdd.conectarBaseDatos();
+				//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+				String[] listaElementosSeleccionados = new String[5];
+				String[] Select = new String[20];
+				
+				listaElementosSeleccionados = new String[1];
+				listaElementosSeleccionados[0] = "COUNT(*)";
+				Select = bbdd.select(con, "SELECT COUNT(*) FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+
+				if(Select[0].charAt(0) != '0') {
+					bbdd.update(con, "UPDATE PANDEMIC_PARTIDA "
+							+ "SET INFECCION = "+infectadas+" "
+							+ "WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+contra+"'");
+				}else {
+					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, INFECCION)"
+							+ "VALUES ('"+usuario+"','"+contra+"',"+infectadas+")");
+				}
+				
 				i = 0;
 				while(j != infectadas) {
 					if((int)(Math.random()*20) == 2) {
@@ -314,7 +375,9 @@ public class dificultad extends JFrame{
 					}
 					
 				}
-				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+				String modo = "D";
+				
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra, modo);
 				dispose();
 				
 			}
@@ -412,6 +475,24 @@ public class dificultad extends JFrame{
 					System.out.println("Error E/S5: " + e5);	
 				}
 				
+				Connection con = bbdd.conectarBaseDatos();
+				//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+				String[] listaElementosSeleccionados = new String[5];
+				String[] Select = new String[20];
+				
+				listaElementosSeleccionados = new String[1];
+				listaElementosSeleccionados[0] = "COUNT(*)";
+				Select = bbdd.select(con, "SELECT COUNT(*) FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+
+				if(Select[0].charAt(0) != '0') {
+					bbdd.update(con, "UPDATE PANDEMIC_PARTIDA "
+							+ "SET INFECCION = "+infectadas+" "
+							+ "WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+contra+"'");
+				}else {
+					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, INFECCION)"
+							+ "VALUES ('"+usuario+"','"+contra+"',"+infectadas+")");
+				}
+				
 				i = 0;
 				while(j != infectadas) {
 					if((int)(Math.random()*20) == 2) {
@@ -430,7 +511,10 @@ public class dificultad extends JFrame{
 					}
 					
 				}
-				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+
+				String modo = "P";
+				
+				Tablero tab = new Tablero(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra, modo);
 				dispose();
 				
 			}

@@ -16,7 +16,10 @@ import java.util.ArrayList;
 
 public class menu extends JFrame{
 	
+	private Clip clip;
+	
     public menu(String usuario, String contra) {
+
         getContentPane().setBackground(new Color(240, 240, 240));
         getContentPane().setLayout(null);
         
@@ -39,6 +42,7 @@ public class menu extends JFrame{
         NuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dificultad dif = new dificultad(usuario, contra);
+				detenerMusica();
 				dispose();
 			}
 		});
@@ -106,6 +110,11 @@ public class menu extends JFrame{
         setButtonProperties(Ranking); // Establecer propiedades del botón
         Ranking.setBounds(480, 630, 350, 40);
         getContentPane().add(Ranking);
+        Ranking.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		mostrarRanking();
+        	}
+        });
         
         JButton Instrucciones = new JButton("instrucciones");
         Instrucciones.setForeground(Color.WHITE);
@@ -180,8 +189,8 @@ public class menu extends JFrame{
     				
     				listaElementosSeleccionados = new String[1];
     				listaElementosSeleccionados[0] = "VACVERD";
-    				Select = bbdd.select(con, "SELECT VACVERD FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
-    				vacuna[2].setporcentaje(Integer.valueOf(Select[0]));
+	    				Select = bbdd.select(con, "SELECT VACVERD FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+	    				vacuna[2].setporcentaje(Integer.valueOf(Select[0]));
     				
     				listaElementosSeleccionados = new String[1];
     				listaElementosSeleccionados[0] = "VACAMA";
@@ -192,9 +201,17 @@ public class menu extends JFrame{
     				listaElementosSeleccionados[0] = "VACAZUL";
     				Select = bbdd.select(con, "SELECT VACAZUL FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
     				vacuna[0].setporcentaje(Integer.valueOf(Select[0]));
+    				
+    				String modo = "";
+    				
+    				listaElementosSeleccionados = new String[1];
+    				listaElementosSeleccionados[0] = "MODO";
+    				Select = bbdd.select(con, "SELECT MODO FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    				modo = Select[0];
     					
 					JOptionPane.showMessageDialog(null, "Partida encontrada. Cargando");
-					TableroCargar tabc = new TableroCargar(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra);
+					TableroCargar tabc = new TableroCargar(ciudades, viruses, vacuna, infectadasRonda, enfActDerr, brotDerr, porcVac, usuario, contra, modo);
+					detenerMusica();
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "El usuario no tiene una partida guardada");
@@ -212,8 +229,10 @@ public class menu extends JFrame{
               
         // Configuración de la ventana principal
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        //int screenWidth = screenSize.width;
+        //int screenHeight = screenSize.height;
+        int screenWidth = 1280;
+        int screenHeight = 1024;
         
         setSize(screenWidth, screenHeight);
         setTitle("CONQUISTA ESTELAR");
@@ -223,6 +242,7 @@ public class menu extends JFrame{
         reproducirMusica("soundtrack.wav");
         
         setVisible(true);
+        setLocationRelativeTo(null);
     }
     
     // Método para cargar la fuente desde un archivo .ttf
@@ -242,17 +262,24 @@ public class menu extends JFrame{
         button.setBorderPainted(false); // Quita el borde del botón
     }
     
-    // Método para reproducir música de fondo
+ // Método para reproducir música de fondo
     private void reproducirMusica(String filePath) {
         try {
             File file = new File(filePath);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
+        }
+    }
+
+ // Método para detener la música
+    private void detenerMusica() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
         }
     }
     
@@ -298,6 +325,132 @@ public class menu extends JFrame{
         instruccionesFrame.getContentPane().add(scrollPane);
          
         instruccionesFrame.setVisible(true);
+    }
+    
+    private void mostrarRanking() {
+        Font customFont = loadFont("Starjedi.ttf");
+		Font text2Font = customFont.deriveFont(Font.PLAIN, 15);
+        JFrame rankingFrame = new JFrame("Ranking del Juego");
+        rankingFrame.setSize(600, 600);
+        rankingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        rankingFrame.setLocationRelativeTo(null);
+        
+        Connection con = bbdd.conectarBaseDatos();
+		String[] listaElementosSeleccionados = new String[5];
+		String[] Select = new String[20];
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "COUNT(*)";
+		Select = bbdd.select(con, "SELECT COUNT(*) FROM PANDEMIC_RANKING", listaElementosSeleccionados);
+		
+		String usuarioFacil = "";
+		String usuarioNormal = "";
+		String usuarioDificil = "";
+		String usuarioPersonalizado = "";
+		
+		String puntuacionFacil = "";
+		String puntuacionNormal = "";
+		String puntuacionDificil = "";
+		String puntuacionPersonalizado = "";
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "USUARIO";
+		Select = bbdd.select(con, "SELECT USUARIO FROM PANDEMIC_RANKING WHERE MODO = 'F' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'F')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			usuarioFacil = "";
+		}else {
+			usuarioFacil = Select[0];
+		}
+		
+		
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "USUARIO";
+		Select = bbdd.select(con, "SELECT USUARIO FROM PANDEMIC_RANKING WHERE MODO = 'N' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'N')", listaElementosSeleccionados);	
+		if(Select[0] == null) {
+			usuarioNormal = "";
+		}else {
+			usuarioNormal = Select[0];
+		}
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "USUARIO";
+		Select = bbdd.select(con, "SELECT USUARIO FROM PANDEMIC_RANKING WHERE MODO = 'D' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'D')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			usuarioDificil = "";
+		}else {
+			usuarioDificil = Select[0];
+		}
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "USUARIO";
+		Select = bbdd.select(con, "SELECT USUARIO FROM PANDEMIC_RANKING WHERE MODO = 'P' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'P')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			usuarioPersonalizado = "";
+		}else {
+			usuarioPersonalizado = Select[0];
+		}
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "PUNTUACION";
+		Select = bbdd.select(con, "SELECT PUNTUACION FROM PANDEMIC_RANKING WHERE MODO = 'F' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'F')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			puntuacionFacil = "";
+		}else {
+			puntuacionFacil = Select[0];
+		}
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "PUNTUACION";
+		Select = bbdd.select(con, "SELECT PUNTUACION FROM PANDEMIC_RANKING WHERE MODO = 'N' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'N')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			puntuacionNormal = "";
+		}else {
+			puntuacionNormal = Select[0];
+		}
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "PUNTUACION";
+		Select = bbdd.select(con, "SELECT PUNTUACION FROM PANDEMIC_RANKING WHERE MODO = 'D' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'D')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			puntuacionDificil = "";
+		}else {
+			puntuacionDificil = Select[0];
+		}
+		
+		listaElementosSeleccionados = new String[1];
+		listaElementosSeleccionados[0] = "PUNTUACION";
+		Select = bbdd.select(con, "SELECT PUNTUACION FROM PANDEMIC_RANKING WHERE MODO = 'P' AND PUNTUACION = (SELECT MAX(PUNTUACION) FROM PANDEMIC_RANKING WHERE MODO = 'P')", listaElementosSeleccionados);
+		if(Select[0] == null) {
+			puntuacionPersonalizado = "";
+		}else {
+			puntuacionPersonalizado = Select[0];
+		}
+		
+		
+		
+		JTextArea rankingText = new JTextArea();
+		rankingText.setFont(text2Font);
+		rankingText.setEditable(false);
+		rankingText.setLineWrap(true);
+		rankingText.setBackground(Color.BLACK);
+		rankingText.setForeground(Color.WHITE);
+		rankingText.setWrapStyleWord(true);
+		rankingText.setText("ranking:\n\n" +
+                " modo fácil: \n" +
+                "\n jugador: "+usuarioFacil.toLowerCase()+" 	puntuación: "+puntuacionFacil+"\n" +
+                "\nmodo normal: \n" +
+                "\n jugador: "+usuarioNormal.toLowerCase()+" 	puntuación: "+puntuacionNormal+"\n" +
+                "\nmodo difícil: \n" +
+                "\n jugador: "+usuarioDificil.toLowerCase()+" 	puntuación: "+puntuacionDificil+"\n" +
+                "\nmodo personalizado: \n" +
+                "\n jugador: "+usuarioPersonalizado.toLowerCase()+" 	puntuación: "+puntuacionPersonalizado+"\n");
+		
+        
+
+        JScrollPane scrollPane = new JScrollPane(rankingText);
+        rankingFrame.getContentPane().add(scrollPane);
+         
+        rankingFrame.setVisible(true);
     }
     
 

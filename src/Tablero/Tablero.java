@@ -44,7 +44,7 @@ public class Tablero extends JFrame {
     JLabel Conquistas;
     JLabel Brotes;
     
-	public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac, String usuario, String contra) {
+	public Tablero(Ciudad[] ciudades, Virus[] viruses, Vacunas[] vacuna, int infectadasRonda, int enfActDerr, int brotDerr, int porcVac, String usuario, String contra, String modo) {
 	
 
     	Font customFont = loadFont("Starjedi.ttf");
@@ -52,8 +52,10 @@ public class Tablero extends JFrame {
 		
         // Configuración de la ventana principal
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        //int screenWidth = screenSize.width;
+        //int screenHeight = screenSize.height;
+        int screenWidth = 1280;
+        int screenHeight = 1024;
         
         setSize(screenWidth, screenHeight);
         setTitle("CONQUISTA ESTELAR");
@@ -66,7 +68,7 @@ public class Tablero extends JFrame {
         
         JButton Guardar = new JButton("guardar y salir");
         Guardar.setForeground(new Color(255, 255, 255));
-        Guardar.setBounds(675, 800, 150, 30);
+        Guardar.setBounds(575, 915, 250, 30);
         getContentPane().add(Guardar);
         Guardar.setFont(buttonFont);
         setButtonProperties(Guardar);
@@ -94,11 +96,11 @@ public class Tablero extends JFrame {
 				if(Select[0].charAt(0) != '0') {
 					bbdd.update(con, "UPDATE PANDEMIC_PARTIDA "
 							+ "SET NUMBROT = "+numBrot+", NUMINF = "+enfAct+", NUMINFPERD = "+enfActDerr+", NUMBROTPERD = "+brotDerr+", NUMINFROND = "+infectadasRonda+", ACCIONES = "+acciones+", VACROJ = "+vacuna[3].getporcentaje()+","
-									+ " VACVERD = "+vacuna[2].getporcentaje()+", VACAMA = "+vacuna[1].getporcentaje()+", VACAZUL = "+vacuna[0].getporcentaje()+", PORCVAC = "+porcVac+", RONDA = "+ronda+" "
+									+ " VACVERD = "+vacuna[2].getporcentaje()+", VACAMA = "+vacuna[1].getporcentaje()+", VACAZUL = "+vacuna[0].getporcentaje()+", PORCVAC = "+porcVac+", RONDA = "+ronda+", MODO = '"+modo+"' "
 							+ "WHERE USUARIO = '"+usuario+"' AND CONTRA = '"+contra+"'");
 				}else {
-					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, NUMBROT, NUMINF, NUMINFPERD, NUMBROTPERD, NUMINFROND, ACCIONES, VACROJ, VACVERD, VACAMA, VACAZUL, PORCVAC, RONDA)"
-							+ "VALUES ('"+usuario+"','"+contra+"',"+numBrot+","+enfAct+","+enfActDerr+","+brotDerr+","+infectadasRonda+","+acciones+","+vacuna[3].getporcentaje()+","+vacuna[2].getporcentaje()+","+vacuna[1].getporcentaje()+","+vacuna[0].getporcentaje()+","+porcVac+","+ronda+")");
+					bbdd.insert(con, "INSERT INTO PANDEMIC_PARTIDA (USUARIO, CONTRA, NUMBROT, NUMINF, NUMINFPERD, NUMBROTPERD, NUMINFROND, ACCIONES, VACROJ, VACVERD, VACAMA, VACAZUL, PORCVAC, RONDA, MODO)"
+							+ "VALUES ('"+usuario+"','"+contra+"',"+numBrot+","+enfAct+","+enfActDerr+","+brotDerr+","+infectadasRonda+","+acciones+","+vacuna[3].getporcentaje()+","+vacuna[2].getporcentaje()+","+vacuna[1].getporcentaje()+","+vacuna[0].getporcentaje()+","+porcVac+","+ronda+", '"+modo+"')");
 				}
 				
 				
@@ -159,9 +161,9 @@ public class Tablero extends JFrame {
 
 		});
         
-        JButton Informacion = new JButton("informacion");
+    	JButton Informacion = new JButton("informacion");
         Informacion.setForeground(new Color(255, 255, 255));
-        Informacion.setBounds(675, 850, 150, 30);
+        Informacion.setBounds(800, 850, 150, 30);
         getContentPane().add(Informacion);
         Informacion.setFont(buttonFont);
         setButtonProperties(Informacion);
@@ -248,7 +250,7 @@ public class Tablero extends JFrame {
         
         JButton Investigar = new JButton("investigar");
         Investigar.setForeground(new Color(255, 255, 255));
-        Investigar.setBounds(675, 915, 150, 30);
+        Investigar.setBounds(800, 915, 150, 30);
         getContentPane().add(Investigar);
         Investigar.setFont(buttonFont);
         setButtonProperties(Investigar);
@@ -265,7 +267,7 @@ public class Tablero extends JFrame {
                 setButtonProperties(btnDarthVader);
                 btnDarthVader.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                    	investigarVacuna(vacuna[3], progressBar_Vader, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra);
+                    	investigarVacuna(vacuna[3], progressBar_Vader, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra, modo);
                     	mirarVictoria(vacuna, ventanaSecundaria);
                     }
                 });
@@ -276,7 +278,7 @@ public class Tablero extends JFrame {
                 setButtonProperties(btnDarthMaul);
                 btnDarthMaul.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                    	investigarVacuna(vacuna[1], progressBar_Maul, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra);
+                    	investigarVacuna(vacuna[1], progressBar_Maul, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra, modo);
                     	mirarVictoria(vacuna, ventanaSecundaria);
                     }
                 });
@@ -287,7 +289,7 @@ public class Tablero extends JFrame {
                 setButtonProperties(btnGeneralGrievous);
                 btnGeneralGrievous.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                    	investigarVacuna(vacuna[2], progressBar_Grievous, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra);
+                    	investigarVacuna(vacuna[2], progressBar_Grievous, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra, modo);
                     	mirarVictoria(vacuna, ventanaSecundaria);
                     }
                 });
@@ -298,7 +300,7 @@ public class Tablero extends JFrame {
                 setButtonProperties(btnDarthSidious);
                 btnDarthSidious.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                    	investigarVacuna(vacuna[0], progressBar_Sidious, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra);
+                    	investigarVacuna(vacuna[0], progressBar_Sidious, porcVac, ciudades, infectadasRonda, planetas, vacuna, enfActDerr, brotDerr, usuario, contra, modo);
                     	mirarVictoria(vacuna, ventanaSecundaria);
                     }
                 });
@@ -429,7 +431,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[47]);
         planetas[47].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[47], ciudades, infectadasRonda,  planetas[47], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[47], ciudades, infectadasRonda,  planetas[47], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -442,7 +444,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[46]);
         planetas[46].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[46], ciudades, infectadasRonda,  planetas[46], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[46], ciudades, infectadasRonda,  planetas[46], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -455,7 +457,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[45]);
         planetas[45].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[45], ciudades, infectadasRonda,  planetas[45], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[45], ciudades, infectadasRonda,  planetas[45], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -468,7 +470,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[44]);
         planetas[44].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[44], ciudades, infectadasRonda,  planetas[44], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[44], ciudades, infectadasRonda,  planetas[44], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -481,7 +483,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[43]);
         planetas[43].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[43], ciudades, infectadasRonda,  planetas[43], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[43], ciudades, infectadasRonda,  planetas[43], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -494,7 +496,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[42]);
         planetas[42].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[42], ciudades, infectadasRonda,  planetas[42], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[42], ciudades, infectadasRonda,  planetas[42], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -507,7 +509,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[41]);
         planetas[41].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[41], ciudades, infectadasRonda,  planetas[41], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[41], ciudades, infectadasRonda,  planetas[41], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -520,7 +522,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[40]);
         planetas[40].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[40], ciudades, infectadasRonda,  planetas[40], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[40], ciudades, infectadasRonda,  planetas[40], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -533,7 +535,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[39]);
         planetas[39].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[39], ciudades, infectadasRonda,  planetas[39], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[39], ciudades, infectadasRonda,  planetas[39], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -546,7 +548,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[38]);
         planetas[38].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[38], ciudades, infectadasRonda,  planetas[38], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[38], ciudades, infectadasRonda,  planetas[38], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -559,7 +561,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[37]);
         planetas[37].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[37], ciudades, infectadasRonda,  planetas[37], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[37], ciudades, infectadasRonda,  planetas[37], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -572,7 +574,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[36]);
         planetas[36].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[36], ciudades, infectadasRonda,  planetas[36], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[36], ciudades, infectadasRonda,  planetas[36], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -585,7 +587,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[35]);
         planetas[35].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[35], ciudades, infectadasRonda,  planetas[35], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[35], ciudades, infectadasRonda,  planetas[35], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -598,7 +600,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[34]);
         planetas[34].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[34], ciudades, infectadasRonda,  planetas[34], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[34], ciudades, infectadasRonda,  planetas[34], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -611,7 +613,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[33]);
         planetas[33].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[33], ciudades, infectadasRonda,  planetas[33], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[33], ciudades, infectadasRonda,  planetas[33], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -624,7 +626,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[32]);
         planetas[32].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[32], ciudades, infectadasRonda,  planetas[32], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[32], ciudades, infectadasRonda,  planetas[32], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -637,7 +639,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[31]);
         planetas[31].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[31], ciudades, infectadasRonda,  planetas[31], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[31], ciudades, infectadasRonda,  planetas[31], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -650,7 +652,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[30]);
         planetas[30].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[30], ciudades, infectadasRonda,  planetas[30], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[30], ciudades, infectadasRonda,  planetas[30], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -663,7 +665,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[29]);
         planetas[29].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[29], ciudades, infectadasRonda,  planetas[29], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[29], ciudades, infectadasRonda,  planetas[29], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -676,7 +678,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[28]);
         planetas[28].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[28], ciudades, infectadasRonda,  planetas[28], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[28], ciudades, infectadasRonda,  planetas[28], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -689,7 +691,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[27]);
         planetas[27].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[27], ciudades, infectadasRonda,  planetas[27], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[27], ciudades, infectadasRonda,  planetas[27], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -702,7 +704,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[26]);
         planetas[26].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[26], ciudades, infectadasRonda,  planetas[26], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[26], ciudades, infectadasRonda,  planetas[26], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -715,7 +717,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[25]);
         planetas[25].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[25], ciudades, infectadasRonda,  planetas[25], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[25], ciudades, infectadasRonda,  planetas[25], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -728,7 +730,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[24]);
         planetas[24].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[24], ciudades, infectadasRonda,  planetas[24], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[24], ciudades, infectadasRonda,  planetas[24], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -741,7 +743,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[23]);
         planetas[23].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[23], ciudades, infectadasRonda,  planetas[23], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[23], ciudades, infectadasRonda,  planetas[23], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -754,7 +756,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[22]);
         planetas[22].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[22], ciudades, infectadasRonda,  planetas[22], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[22], ciudades, infectadasRonda,  planetas[22], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -767,7 +769,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[21]);
         planetas[21].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[21], ciudades, infectadasRonda,  planetas[21], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[21], ciudades, infectadasRonda,  planetas[21], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -780,7 +782,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[20]);
         planetas[20].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[20], ciudades, infectadasRonda,  planetas[20], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[20], ciudades, infectadasRonda,  planetas[20], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -793,7 +795,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[19]);
         planetas[19].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[19], ciudades, infectadasRonda,  planetas[19], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[19], ciudades, infectadasRonda,  planetas[19], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -806,7 +808,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[18]);
         planetas[18].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[18], ciudades, infectadasRonda,  planetas[18], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[18], ciudades, infectadasRonda,  planetas[18], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -819,7 +821,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[17]);
         planetas[17].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[17], ciudades, infectadasRonda,  planetas[17], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[17], ciudades, infectadasRonda,  planetas[17], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -832,7 +834,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[16]);
         planetas[16].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[16], ciudades, infectadasRonda,  planetas[16], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[16], ciudades, infectadasRonda,  planetas[16], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -845,7 +847,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[15]);
         planetas[15].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[15], ciudades, infectadasRonda,  planetas[15], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[15], ciudades, infectadasRonda,  planetas[15], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -858,7 +860,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[14]);
         planetas[14].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[14], ciudades, infectadasRonda,  planetas[14], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[14], ciudades, infectadasRonda,  planetas[14], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -871,7 +873,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[13]);
         planetas[13].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[13], ciudades, infectadasRonda,  planetas[13], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[13], ciudades, infectadasRonda,  planetas[13], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -884,7 +886,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[12]);
         planetas[12].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[12], ciudades, infectadasRonda,  planetas[12], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[12], ciudades, infectadasRonda,  planetas[12], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -897,7 +899,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[11]);
         planetas[11].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[11], ciudades, infectadasRonda,  planetas[11], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[11], ciudades, infectadasRonda,  planetas[11], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -910,7 +912,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[10]);
         planetas[10].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[10], ciudades, infectadasRonda,  planetas[10], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[10], ciudades, infectadasRonda,  planetas[10], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -923,7 +925,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[9]);
         planetas[9].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[9], ciudades, infectadasRonda,  planetas[9], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[9], ciudades, infectadasRonda,  planetas[9], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -936,7 +938,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[8]);
         planetas[8].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[8], ciudades, infectadasRonda,  planetas[8], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[8], ciudades, infectadasRonda,  planetas[8], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -949,7 +951,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[7]);
         planetas[7].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[7], ciudades, infectadasRonda,  planetas[7], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[7], ciudades, infectadasRonda,  planetas[7], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -962,7 +964,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[6]);
         planetas[6].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[6], ciudades, infectadasRonda,  planetas[6], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[6], ciudades, infectadasRonda,  planetas[6], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -975,7 +977,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[5]);
         planetas[5].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[5], ciudades, infectadasRonda,  planetas[5], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[5], ciudades, infectadasRonda,  planetas[5], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -988,7 +990,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[4]);
         planetas[4].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[4], ciudades, infectadasRonda,  planetas[4], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[4], ciudades, infectadasRonda,  planetas[4], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -1001,7 +1003,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[3]);
         planetas[3].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[3], ciudades, infectadasRonda,  planetas[3], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[3], ciudades, infectadasRonda,  planetas[3], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -1014,7 +1016,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[2]);
         planetas[2].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[2], ciudades, infectadasRonda,  planetas[2], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[2], ciudades, infectadasRonda,  planetas[2], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -1027,7 +1029,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[1]);
         planetas[1].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[1], ciudades, infectadasRonda,  planetas[1], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[1], ciudades, infectadasRonda,  planetas[1], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -1040,7 +1042,7 @@ public class Tablero extends JFrame {
         setButtonProperties( planetas[0]);
         planetas[0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mostrarVentana(ciudades[0], ciudades, infectadasRonda,  planetas[0], vacuna, enfActDerr, brotDerr, usuario, contra); // Mostrar la ventana con la información
+            	mostrarVentana(ciudades[0], ciudades, infectadasRonda,  planetas[0], vacuna, enfActDerr, brotDerr, usuario, contra, porcVac, modo); // Mostrar la ventana con la información
             }
         });
         
@@ -1051,6 +1053,7 @@ public class Tablero extends JFrame {
         getContentPane().add(Mapa);
               
         setVisible(true);
+	    setLocationRelativeTo(null);
         
         
         
@@ -1073,7 +1076,7 @@ public class Tablero extends JFrame {
 	}
 	
 	// Método para mostrar una ventana con el nombre de la ciudad y el nivel de infección
-	private void mostrarVentana(Ciudad ciudad, Ciudad [] ciudades, int infectadasRonda, JButton boton, Vacunas [] vacuna, int enfActDerr, int brotDerr, String usuario, String contra) {
+	private void mostrarVentana(Ciudad ciudad, Ciudad [] ciudades, int infectadasRonda, JButton boton, Vacunas [] vacuna, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
 	    
 		JFrame ventana = new JFrame();
 	    JLabel etiquetaCiudad = new JLabel("planeta : " + ciudad.getnombre().toLowerCase());
@@ -1117,7 +1120,7 @@ public class Tablero extends JFrame {
                 		acciones = 4;
                 		modifcarAcciones();
                 		pasarRonda();
-                		infectarCiudades(ciudades, ciudad, infectadasRonda, enfActDerr, brotDerr, usuario, contra);
+                		infectarCiudades(ciudades, ciudad, infectadasRonda, enfActDerr, brotDerr, usuario, contra, porcVac, modo);
             		}
             	}else if(ciudad.getinfeccion() == 0 && acciones != 0){
             		JOptionPane.showMessageDialog(null, "Este planeta no esta conquistado");
@@ -1161,7 +1164,7 @@ public class Tablero extends JFrame {
 	    setButtonProperties(reconquistarButton);
 	}
 	
-	private void infectarCiudades(Ciudad [] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra) {
+	private void infectarCiudades(Ciudad [] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
 		int i = 0;
 		int j = 0;
 		
@@ -1191,7 +1194,7 @@ public class Tablero extends JFrame {
 					enfAct++;
 				}else if(ciudades[i].getinfeccion() == 3) {
 					//JOptionPane.showMessageDialog(null, "La ciudad que ha brotado: " + ciudades[i].getnombre());
-					brotarCiudades(ciudades, ciudades[i], infectadasRonda, enfActDerr, brotDerr, usuario, contra);
+					brotarCiudades(ciudades, ciudades[i], infectadasRonda, enfActDerr, brotDerr, usuario, contra, porcVac, modo);
 				}
 			}
 			
@@ -1207,6 +1210,20 @@ public class Tablero extends JFrame {
 		if(enfAct >= enfActDerr && perder < 1) {
 			perder++;
 			ventanaSecundaria.dispose();
+			JOptionPane.showMessageDialog(null, "Has perdido");
+			
+			Connection con = bbdd.conectarBaseDatos();
+			//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+			String[] listaElementosSeleccionados = new String[5];
+			String[] Select = new String[20];
+			
+			listaElementosSeleccionados = new String[1];
+			listaElementosSeleccionados[0] = "INFINICIO";
+			Select = bbdd.select(con, "SELECT INFINICIO FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+			int infectadasInicio = Integer.valueOf(Select[0]);
+			
+			double puntuacionFinal = calcularPuntuacion(infectadasInicio, infectadasRonda, enfActDerr, brotDerr, porcVac, ronda, usuario, modo);
+			JOptionPane.showMessageDialog(null, "Puntuación final: " + puntuacionFinal);
 			dispose();
 			menu men = new menu(usuario, contra);
 		}
@@ -1217,12 +1234,12 @@ public class Tablero extends JFrame {
 		
 		for(int i = 0; i < 48; i++) {
 			if(ciudades[i].getinfeccion() != 0) {
-				enfAct++;
+				enfAct = enfAct + ciudades[i].getinfeccion();
 			}
 		}
 	}
 	
-	private void brotarCiudades(Ciudad[] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra) {
+	private void brotarCiudades(Ciudad[] ciudades, Ciudad ciudad, int infectadasRonda, int enfActDerr, int brotDerr, String usuario, String contra, int porcVac, String modo) {
 		numBrot++;
 	    Brotes.setText("brotes: " + numBrot + "/" + brotDerr);
 	    
@@ -1290,6 +1307,21 @@ public class Tablero extends JFrame {
 			perder++;
 	        JOptionPane.showMessageDialog(null, "Has perdido");
 	        ventanaSecundaria.dispose();
+
+			
+			Connection con = bbdd.conectarBaseDatos();
+			//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+			String[] listaElementosSeleccionados = new String[5];
+			String[] Select = new String[20];
+			
+			listaElementosSeleccionados = new String[1];
+			listaElementosSeleccionados[0] = "INFINICIO";
+			Select = bbdd.select(con, "SELECT INFINICIO FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+			int infectadasInicio = Integer.valueOf(Select[0]);
+			
+			double puntuacionFinal = calcularPuntuacion(infectadasInicio, infectadasRonda, enfActDerr, brotDerr, porcVac, ronda, usuario, modo);
+			JOptionPane.showMessageDialog(null, "Puntuación final: " + puntuacionFinal);
+	        
 	        menu men = new menu(usuario, contra);
 	        dispose();
 	    }
@@ -1301,10 +1333,11 @@ public class Tablero extends JFrame {
 	}
 	
 	private void pasarRonda() {
-		Rondas.setText("ronda " + ronda);
+		Rondas.setText("Ronda " + ronda);
+		JOptionPane.showMessageDialog(null, "Ronda " + ronda);
 	}
 
-	private void investigarVacuna(Vacunas vacuna, JProgressBar prog, int porcVac, Ciudad[] ciudades, int infectadasRonda, JButton [] planetas, Vacunas[] vacunas, int enfActDerr, int brotDerr, String usuario, String contra) {
+	private void investigarVacuna(Vacunas vacuna, JProgressBar prog, int porcVac, Ciudad[] ciudades, int infectadasRonda, JButton [] planetas, Vacunas[] vacunas, int enfActDerr, int brotDerr, String usuario, String contra, String modo) {
 		if(vacuna.getporcentaje() >= 100) {
 			JOptionPane.showMessageDialog(null, "Ya está investigado");
 		}else if(acciones !=4){
@@ -1314,6 +1347,18 @@ public class Tablero extends JFrame {
 			prog.setValue((int)vacuna.getporcentaje());
 			if(vacunas[0].getporcentaje() >= 100 && vacunas[1].getporcentaje() >= 100 && vacunas[2].getporcentaje() >= 100 && vacunas[3].getporcentaje() >= 100) {
             	JOptionPane.showMessageDialog(null, "¡Has ganado!");
+    			Connection con = bbdd.conectarBaseDatos();
+    			//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+    			String[] listaElementosSeleccionados = new String[5];
+    			String[] Select = new String[20];
+    			
+    			listaElementosSeleccionados = new String[1];
+    			listaElementosSeleccionados[0] = "INFINICIO";
+    			Select = bbdd.select(con, "SELECT INFINICIO FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+    			int infectadasInicio = Integer.valueOf(Select[0]);
+    			
+    			double puntuacionFinal = calcularPuntuacion(infectadasInicio, infectadasRonda, enfActDerr, brotDerr, porcVac, ronda, usuario, modo);
+    			JOptionPane.showMessageDialog(null, "Puntuación final: " + puntuacionFinal);
             	menu men = new menu(usuario, contra);
             	dispose();
             }else {
@@ -1351,7 +1396,7 @@ public class Tablero extends JFrame {
         					//JOptionPane.showMessageDialog(null, "La ciudad que se ha infectado: " + ciudades[i].getnombre() + " su nivel de infección: " + ciudades[i].getinfeccion());
         				}else if(ciudades[i].getinfeccion() == 3) {
         					//JOptionPane.showMessageDialog(null, "La ciudad que ha brotado: " + ciudades[i].getnombre() + " su nivel de infección: " + ciudades[i].getinfeccion());
-        					brotarCiudades(ciudades, ciudades[i], infectadasRonda, enfActDerr, brotDerr, usuario, contra);
+        					brotarCiudades(ciudades, ciudades[i], infectadasRonda, enfActDerr, brotDerr, usuario, contra, porcVac, modo);
         				}
         			}
         			
@@ -1367,6 +1412,22 @@ public class Tablero extends JFrame {
         		if(enfAct >= enfActDerr && perder < 1) {
         			perder++;
         			JOptionPane.showMessageDialog(null, "Has perdido");
+        			
+
+        			Connection con = bbdd.conectarBaseDatos();
+        			//Declaración de Arrays de Strings que se usan en las funciones de bbdd
+        			String[] listaElementosSeleccionados = new String[5];
+        			String[] Select = new String[20];
+        			
+        			listaElementosSeleccionados = new String[1];
+        			listaElementosSeleccionados[0] = "INFINICIO";
+        			Select = bbdd.select(con, "SELECT INFINICIO FROM PANDEMIC_PARTIDA WHERE USUARIO = '" + usuario + "' AND CONTRA = '" + contra +"'", listaElementosSeleccionados);
+        			int infectadasInicio = Integer.valueOf(Select[0]);
+        			
+        			double puntuacionFinal = calcularPuntuacion(infectadasInicio, infectadasRonda, enfActDerr, brotDerr, porcVac, ronda, usuario, modo);
+        			JOptionPane.showMessageDialog(null, "Puntuación final: " + puntuacionFinal);
+        	        
+        			
         			ventanaSecundaria.dispose();
         			menu men = new menu(usuario, contra);
         			dispose();
@@ -1386,5 +1447,25 @@ public class Tablero extends JFrame {
 		if(vacuna[0].getporcentaje() >= 100 && vacuna[1].getporcentaje() >= 100 && vacuna[2].getporcentaje() >= 100 && vacuna[3].getporcentaje() >= 100) {
         	ventanaSecundaria.dispose();
         }
+	}
+	
+	public static double calcularPuntuacion(int ciudadesInfectadasInicio, int ciudadesInfectadasRonda, int enfermedadesActivasPerder, int brotesActivosPerder, int porcentajeDesarrolloVacuna, int rondas, String usuario, String modo) {
+
+			// Cálculo de la puntuación según la fórmula dada
+			
+			double puntuacion = (ciudadesInfectadasInicio * ciudadesInfectadasRonda)*10;
+			double puntuacionPartida = puntuacion - (puntuacion * (porcentajeDesarrolloVacuna / 100.0))
+									  - (puntuacion * (enfermedadesActivasPerder / 100.0))
+									  - (puntuacion * (brotesActivosPerder / 100.0));
+									
+			double puntuacionFinal = puntuacionPartida - (puntuacionPartida * (rondas / 100.0));
+			puntuacionFinal = Math.floor(puntuacionFinal * 100) / 100;
+			
+			Connection con = bbdd.conectarBaseDatos();
+			bbdd.insert(con, "INSERT INTO PANDEMIC_RANKING (USUARIO, PUNTUACION, MODO)"
+					+ "VALUES ('"+usuario+"',"+puntuacionFinal+",'"+modo+"')");
+			
+			return puntuacionFinal;
+
 	}
 }
